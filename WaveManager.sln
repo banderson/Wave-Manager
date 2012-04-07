@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManager", "WaveManager\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManagerUI", "WaveManagerUI\WaveManagerUI.csproj", "{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManagerBusiness", "WaveManagerBusiness\WaveManagerBusiness.csproj", "{83E28BA0-5B89-4DE6-8E82-669525479E86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}.Release|x86.ActiveCfg = Release|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{83E28BA0-5B89-4DE6-8E82-669525479E86}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

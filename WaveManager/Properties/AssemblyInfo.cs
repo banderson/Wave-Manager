@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WaveManager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WaveManager")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Boston University")]
+[assembly: AssemblyProduct("Anderson")]
+[assembly: AssemblyCopyright("Copyright © The Context Switch 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

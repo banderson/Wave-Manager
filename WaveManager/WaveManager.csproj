@@ -68,6 +68,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WaveManagerUI\WaveManagerUI.csproj">
+      <Project>{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}</Project>
+      <Name>WaveManagerUI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

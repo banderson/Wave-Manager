@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WaveManagerUI")]
+[assembly: AssemblyTitle("WaveManagerBusiness")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Boston University")]
-[assembly: AssemblyProduct("Anderson")]
-[assembly: AssemblyCopyright("Copyright © The Context Switch 2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("WaveManagerBusiness")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("30164361-3972-40b5-848d-a532f000c029")]
+[assembly: Guid("bdef3160-00ac-491a-ba99-b332b10f6c1e")]
 
 // Version information for an assembly consists of the following four values:
 //
