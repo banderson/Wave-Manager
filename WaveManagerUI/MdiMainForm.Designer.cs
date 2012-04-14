@@ -111,10 +111,10 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.fileView1 = new WaveManagerUI.FileView();
+            this.statusBar1 = new WaveManagerUI.StatusBar();
             this._fileView = new WaveManagerUI.FileView();
             this._statusBar = new WaveManagerUI.StatusBar();
-            this.statusBar1 = new WaveManagerUI.StatusBar();
-            this.fileView1 = new WaveManagerUI.FileView();
             this._menuBar.SuspendLayout();
             this._toolbar.SuspendLayout();
             this.SuspendLayout();
@@ -175,6 +175,7 @@
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenClick);
             // 
             // toolStripSeparator
             // 
@@ -577,6 +578,7 @@
             this.openToolStripButton.Size = new System.Drawing.Size(40, 51);
             this.openToolStripButton.Text = "&Open";
             this.openToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.openToolStripButton.Click += new System.EventHandler(this.OnOpenClick);
             // 
             // saveToolStripButton
             // 
@@ -775,8 +777,31 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
+            // fileView1
+            // 
+            this.fileView1.AllowDrop = true;
+            this.fileView1.BackColor = System.Drawing.SystemColors.Info;
+            this.fileView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.fileView1.Location = new System.Drawing.Point(3, 79);
+            this.fileView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fileView1.Name = "fileView1";
+            this.fileView1.Size = new System.Drawing.Size(204, 600);
+            this.fileView1.TabIndex = 9;
+            this.fileView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+            this.fileView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
+            // 
+            // statusBar1
+            // 
+            this.statusBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusBar1.Location = new System.Drawing.Point(3, 679);
+            this.statusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.statusBar1.Name = "statusBar1";
+            this.statusBar1.Size = new System.Drawing.Size(1087, 36);
+            this.statusBar1.TabIndex = 8;
+            // 
             // _fileView
             // 
+            this._fileView.AllowDrop = true;
             this._fileView.BackColor = System.Drawing.SystemColors.Info;
             this._fileView.Dock = System.Windows.Forms.DockStyle.Left;
             this._fileView.Location = new System.Drawing.Point(0, 79);
@@ -793,25 +818,6 @@
             this._statusBar.Name = "_statusBar";
             this._statusBar.Size = new System.Drawing.Size(1090, 35);
             this._statusBar.TabIndex = 4;
-            // 
-            // statusBar1
-            // 
-            this.statusBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBar1.Location = new System.Drawing.Point(3, 679);
-            this.statusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.statusBar1.Name = "statusBar1";
-            this.statusBar1.Size = new System.Drawing.Size(1087, 36);
-            this.statusBar1.TabIndex = 8;
-            // 
-            // fileView1
-            // 
-            this.fileView1.BackColor = System.Drawing.SystemColors.Info;
-            this.fileView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.fileView1.Location = new System.Drawing.Point(3, 79);
-            this.fileView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.fileView1.Name = "fileView1";
-            this.fileView1.Size = new System.Drawing.Size(204, 600);
-            this.fileView1.TabIndex = 9;
             // 
             // MdiMainForm
             // 
@@ -830,6 +836,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wave Viewer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             this._menuBar.ResumeLayout(false);
             this._menuBar.PerformLayout();
             this._toolbar.ResumeLayout(false);

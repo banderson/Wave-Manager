@@ -415,6 +415,7 @@
             // 
             // fileView1
             // 
+            this.fileView1.BackColor = System.Drawing.SystemColors.Info;
             this.fileView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.fileView1.Location = new System.Drawing.Point(0, 63);
             this.fileView1.Name = "fileView1";
@@ -425,9 +426,9 @@
             // 
             this._splitter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this._splitter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this._splitter.Location = new System.Drawing.Point(204, 63);
+            this._splitter.Location = new System.Drawing.Point(0, 63);
             this._splitter.Name = "_splitter";
-            this._splitter.Size = new System.Drawing.Size(3, 370);
+            this._splitter.Size = new System.Drawing.Size(3, 418);
             this._splitter.TabIndex = 4;
             this._splitter.TabStop = false;
             // 
@@ -436,8 +437,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._splitter);
-            //this.Controls.Add(this.fileView1);
-            //this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "MainControl";

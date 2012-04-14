@@ -49,6 +49,8 @@
             this.Controls.Add(this._btnBrowse);
             this.Name = "FileView";
             this.Size = new System.Drawing.Size(204, 459);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             this.ResumeLayout(false);
 
         }

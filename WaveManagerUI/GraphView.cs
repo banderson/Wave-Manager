@@ -18,19 +18,12 @@ namespace WaveManagerUI
         public GraphView()
         {
             InitializeComponent();
-            try
-            {
-                Wave = WaveManagerBusiness.WaveManager.Load(@"C:\Users\Ben\Desktop\Waves\carbrake.wav");
-            }
-            catch (FileNotFoundException)
-            {
-                //swallow it...
-                Wave = new WaveFile();
-            }
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
+            if (Wave == null) return;
+
             Graphics g = e.Graphics;
 
             // setup the scrolling mechanism

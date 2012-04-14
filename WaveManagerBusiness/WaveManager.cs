@@ -11,6 +11,9 @@ namespace WaveManagerBusiness
 {
     public static class WaveManager
     {
+        /*** Events ***/
+        public static event Events.FileOpenedEventHandler FileOpened;
+
         public static WaveFile Load(string fileName)
         {
             WaveFile file = new WaveFile();
@@ -24,7 +27,8 @@ namespace WaveManagerBusiness
                 file.NumberOfSamples = br.ReadInt32();
                 try
                 {
-                    file.Data = new byte[file.NumberOfSamples]; // allocates array size, otherwise will crash 
+                    // allocates array size, otherwise will crash 
+                    file.Data = new byte[file.NumberOfSamples]; 
                 }
                 catch (Exception)
                 {
@@ -38,21 +42,32 @@ namespace WaveManagerBusiness
             return file;
         }
 
-        public static bool IsValid(string fileName)
+        public static WaveFile OpenFile(string fileName)
         {
-            var file = WaveManager.Load(fileName);
+            WaveFile file = null;
 
-            return IsValid(file);
+            try
+            {
+                file = Load(fileName);
+            }
+            catch (FileNotFoundException)
+            {
+                //swallow it...
+            }
+
+            FireFileOpened(file);
+
+            return file;
+        }
+
+        public static void FireFileOpened(WaveFile file)
+        {
+            if (FileOpened != null)
+                FileOpened.Invoke(file);
         }
 
         public static bool IsValid(WaveFile file)
         {
-            // credit: http://stackoverflow.com/questions/472906/net-string-to-byte-array-c-sharp
-            //BinaryFormatter bfx = new BinaryFormatter();
-            //MemoryStream msx = new MemoryStream();
-            //msx.Write(file.Header, 0, 2);
-            //msx.Seek(0, 0);
-
             // first 4-bytes from header (there are probably many other better ways to do this...)
             var test = "";
             for (int i = 0; i < 4; i++)
