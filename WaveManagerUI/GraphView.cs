@@ -22,7 +22,7 @@ namespace WaveManagerUI
             {
                 Wave = WaveManagerBusiness.WaveManager.Load(@"C:\Users\Ben\Desktop\Waves\carbrake.wav");
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 //swallow it...
                 Wave = new WaveFile();

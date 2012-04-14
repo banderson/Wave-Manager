@@ -436,8 +436,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._splitter);
-            this.Controls.Add(this.fileView1);
-            this.Controls.Add(this.statusBar1);
+            //this.Controls.Add(this.fileView1);
+            //this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "MainControl";

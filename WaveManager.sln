@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManagerBusiness", "Wave
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManagerDataContracts", "WaveDataContracts\WaveManagerDataContracts.csproj", "{EFB97426-33D7-4134-B846-3E3BAC1EFD36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveManagerTests", "WaveManagerTests\WaveManagerTests.csproj", "{FBBC0696-C542-4F01-ACA2-E9A720F067CC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,16 +59,6 @@ Global
 		{EFB97426-33D7-4134-B846-3E3BAC1EFD36}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EFB97426-33D7-4134-B846-3E3BAC1EFD36}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EFB97426-33D7-4134-B846-3E3BAC1EFD36}.Release|x86.ActiveCfg = Release|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FBBC0696-C542-4F01-ACA2-E9A720F067CC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

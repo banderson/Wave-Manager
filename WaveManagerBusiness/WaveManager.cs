@@ -26,7 +26,7 @@ namespace WaveManagerBusiness
                 {
                     file.Data = new byte[file.NumberOfSamples]; // allocates array size, otherwise will crash 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // don't load any data...
                     file.NumberOfSamples = 0;
