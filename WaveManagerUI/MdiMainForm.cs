@@ -28,5 +28,10 @@ namespace WaveManagerUI
             AboutForm _aboutForm = new AboutForm();
             _aboutForm.ShowDialog();
         }
+
+        private void OnHelpIndexClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Help:Index not required for this project");
+        }
     }
 }

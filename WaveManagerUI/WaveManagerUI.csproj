@@ -85,6 +85,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatusStrip.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,11 +121,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StatusStrip.resx">
       <DependentUpon>StatusStrip.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WaveDataContracts\WaveManagerDataContracts.csproj">
+      <Project>{EFB97426-33D7-4134-B846-3E3BAC1EFD36}</Project>
+      <Name>WaveManagerDataContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WaveManagerBusiness\WaveManagerBusiness.csproj">
       <Project>{83E28BA0-5B89-4DE6-8E82-669525479E86}</Project>
       <Name>WaveManagerBusiness</Name>

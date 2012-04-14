@@ -37,6 +37,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Name = "GraphView";
             this.Size = new System.Drawing.Size(558, 461);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.ResumeLayout(false);
 
         }

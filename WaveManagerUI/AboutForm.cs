@@ -43,7 +43,7 @@ namespace WaveManagerUI
                 _linkURL.LinkVisited = true;
                 Process.Start(CompanyInfo.CompanyURL);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to visit Company Website at this time. Please Try again later.");
             }

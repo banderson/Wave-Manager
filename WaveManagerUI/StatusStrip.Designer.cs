@@ -45,7 +45,7 @@
             this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.41766F));
             this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this._layoutPanel.Controls.Add(this._memoryProgressBar, 0, 0);
             this._layoutPanel.Controls.Add(this._errorList, 1, 0);
             this._layoutPanel.Controls.Add(this._wavesCount, 2, 0);
@@ -74,14 +74,14 @@
             this._errorList.FormattingEnabled = true;
             this._errorList.Location = new System.Drawing.Point(81, 3);
             this._errorList.Name = "_errorList";
-            this._errorList.Size = new System.Drawing.Size(491, 21);
+            this._errorList.Size = new System.Drawing.Size(490, 21);
             this._errorList.TabIndex = 1;
             // 
             // _wavesCount
             // 
             this._wavesCount.AutoSize = true;
             this._wavesCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._wavesCount.Location = new System.Drawing.Point(578, 0);
+            this._wavesCount.Location = new System.Drawing.Point(577, 0);
             this._wavesCount.Name = "_wavesCount";
             this._wavesCount.Size = new System.Drawing.Size(77, 36);
             this._wavesCount.TabIndex = 2;
@@ -92,7 +92,7 @@
             // 
             this._samplesCount.AutoSize = true;
             this._samplesCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._samplesCount.Location = new System.Drawing.Point(661, 0);
+            this._samplesCount.Location = new System.Drawing.Point(660, 0);
             this._samplesCount.Name = "_samplesCount";
             this._samplesCount.Size = new System.Drawing.Size(51, 36);
             this._samplesCount.TabIndex = 3;
@@ -102,9 +102,9 @@
             // _volumeControl
             // 
             this._volumeControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._volumeControl.Location = new System.Drawing.Point(718, 3);
+            this._volumeControl.Location = new System.Drawing.Point(717, 3);
             this._volumeControl.Name = "_volumeControl";
-            this._volumeControl.Size = new System.Drawing.Size(61, 30);
+            this._volumeControl.Size = new System.Drawing.Size(62, 30);
             this._volumeControl.TabIndex = 4;
             // 
             // StatusBar
