@@ -25,12 +25,19 @@ namespace WaveManagerUI
 
             WaveManagerBusiness.WaveManager.FileOpened += UpdateFileCount;
             WaveManagerBusiness.WaveManager.FileClosed += UpdateFileCount;
+
+            WaveManagerBusiness.WaveManager.FileClosed += UpdateSampleCount;
+            WaveManagerBusiness.WaveManager.WindowSelected += UpdateSampleCount;
         }
 
         private void UpdateFileCount(WaveFile file)
         {
             _wavesCount.Text = "Waves: "+ WaveManagerBusiness.WaveManager.GetOpenFilesCount().ToString();
-            _samplesCount.Text = "Samples: " + WaveManagerBusiness.WaveManager.GetOpenFilesSamplesCount().ToString();
+        }
+
+        private void UpdateSampleCount(WaveFile file)
+        {
+            _samplesCount.Text = "Samples: " + WaveManagerBusiness.WaveManager.GetActiveFile().NumberOfSamples.ToString();
         }
 
         private void RefreshMemoryCounter(WaveFile file)

@@ -42,5 +42,10 @@ namespace WaveManagerUI
         {
             WaveManagerBusiness.WaveManager.FireFileClosed(Wave);
         }
+
+        private void OnFocus(object sender, EventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.FireWindowSelected(this.Wave);
+        }
     }
 }

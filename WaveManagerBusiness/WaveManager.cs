@@ -14,11 +14,16 @@ namespace WaveManagerBusiness
         /*** Events ***/
         public static event Events.FileOpenedEventHandler FileOpened;
         public static event Events.FileClosedEventHandler FileClosed;
+        public static event Events.WindowSelectedEventHandler WindowSelected;
 
         static WaveManager()
         {
             FileClosed += RemoveOpenFile;
+            WindowSelected += SetActiveFile;
         }
+
+        public static WaveFile ActiveFile;
+
 
         static List<WaveFile> openFiles = new List<WaveFile>();
         public static int GetOpenFilesCount()
@@ -36,6 +41,7 @@ namespace WaveManagerBusiness
         private static void RemoveOpenFile(WaveFile file)
         {
             WaveManager.openFiles.Remove(file);
+            ActiveFile = null;
         }
 
         public static WaveFile Load(string fileName)
@@ -98,6 +104,12 @@ namespace WaveManagerBusiness
                 FileClosed.Invoke(file);
         }
 
+        public static void FireWindowSelected(WaveFile file)
+        {
+            if (WindowSelected != null)
+                WindowSelected.Invoke(file);
+        }
+
         public static bool IsValid(WaveFile file)
         {
             // first 4-bytes from header (there are probably many other better ways to do this...)
@@ -109,6 +121,18 @@ namespace WaveManagerBusiness
 
             // check if the first 4 bytes of the header are "RIFF"
             return test == WaveFile.HEADER_PREFIX;
+        }
+
+        public static void SetActiveFile(WaveFile file)
+        {
+            ActiveFile = file;
+        }
+
+        public static WaveFile GetActiveFile()
+        {
+            return (ActiveFile == null)
+                ? new WaveFile()
+                : ActiveFile;
         }
     }
 }

@@ -50,6 +50,7 @@
             this.Text = "Graph";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
             this.Load += new System.EventHandler(this.MdiForm_Load);
+            this.Enter += new System.EventHandler(this.OnFocus);
             this.ResumeLayout(false);
 
         }
