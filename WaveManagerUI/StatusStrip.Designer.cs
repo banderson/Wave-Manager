@@ -43,9 +43,9 @@
             this._layoutPanel.ColumnCount = 5;
             this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.16931F));
             this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.83069F));
-            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this._layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
             this._layoutPanel.Controls.Add(this._errorList, 1, 0);
             this._layoutPanel.Controls.Add(this._wavesCount, 2, 0);
             this._layoutPanel.Controls.Add(this._samplesCount, 3, 0);
@@ -64,18 +64,18 @@
             this._errorList.Dock = System.Windows.Forms.DockStyle.Fill;
             this._errorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._errorList.FormattingEnabled = true;
-            this._errorList.Location = new System.Drawing.Point(71, 3);
+            this._errorList.Location = new System.Drawing.Point(59, 3);
             this._errorList.Name = "_errorList";
-            this._errorList.Size = new System.Drawing.Size(485, 21);
+            this._errorList.Size = new System.Drawing.Size(404, 21);
             this._errorList.TabIndex = 1;
             // 
             // _wavesCount
             // 
             this._wavesCount.AutoSize = true;
             this._wavesCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._wavesCount.Location = new System.Drawing.Point(562, 0);
+            this._wavesCount.Location = new System.Drawing.Point(469, 0);
             this._wavesCount.Name = "_wavesCount";
-            this._wavesCount.Size = new System.Drawing.Size(77, 36);
+            this._wavesCount.Size = new System.Drawing.Size(88, 36);
             this._wavesCount.TabIndex = 2;
             this._wavesCount.Text = "Waves:  0";
             this._wavesCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,9 +84,9 @@
             // 
             this._samplesCount.AutoSize = true;
             this._samplesCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._samplesCount.Location = new System.Drawing.Point(645, 0);
+            this._samplesCount.Location = new System.Drawing.Point(563, 0);
             this._samplesCount.Name = "_samplesCount";
-            this._samplesCount.Size = new System.Drawing.Size(51, 36);
+            this._samplesCount.Size = new System.Drawing.Size(111, 36);
             this._samplesCount.TabIndex = 3;
             this._samplesCount.Text = "Samples: 0";
             this._samplesCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -94,9 +94,9 @@
             // _volumeControl
             // 
             this._volumeControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._volumeControl.Location = new System.Drawing.Point(702, 3);
+            this._volumeControl.Location = new System.Drawing.Point(680, 3);
             this._volumeControl.Name = "_volumeControl";
-            this._volumeControl.Size = new System.Drawing.Size(77, 30);
+            this._volumeControl.Size = new System.Drawing.Size(99, 30);
             this._volumeControl.TabIndex = 4;
             // 
             // _memoryMeter
@@ -105,7 +105,7 @@
             this._memoryMeter.Enabled = false;
             this._memoryMeter.Location = new System.Drawing.Point(3, 3);
             this._memoryMeter.Name = "_memoryMeter";
-            this._memoryMeter.Size = new System.Drawing.Size(62, 30);
+            this._memoryMeter.Size = new System.Drawing.Size(50, 30);
             this._memoryMeter.TabIndex = 5;
             // 
             // StatusBar

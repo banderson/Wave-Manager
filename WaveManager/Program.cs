@@ -18,7 +18,7 @@ namespace WaveManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             new SplashScreenApp().Run(args);
         }
     }
@@ -35,8 +35,8 @@ namespace WaveManager
 
         protected override void OnCreateMainForm()
         {
-            //FOR TESTING PURPOSES ONLY (remove once you've added your code)
-            System.Threading.Thread.Sleep(1000);
+            //FOR TESTING PURPOSES ONLY
+            System.Threading.Thread.Sleep(2000);
 
             //Set the main form to a new instance of your form
             //(this will automatically close the splash screen)

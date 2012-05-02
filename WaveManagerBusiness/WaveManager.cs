@@ -15,6 +15,29 @@ namespace WaveManagerBusiness
         public static event Events.FileOpenedEventHandler FileOpened;
         public static event Events.FileClosedEventHandler FileClosed;
 
+        static WaveManager()
+        {
+            FileClosed += RemoveOpenFile;
+        }
+
+        static List<WaveFile> openFiles = new List<WaveFile>();
+        public static int GetOpenFilesCount()
+        {
+            return openFiles.Count;
+        }
+        public static int GetOpenFilesSamplesCount()
+        {
+            return openFiles.Sum(x => x.NumberOfSamples);
+        }
+        private static void AddOpenFile(WaveFile file)
+        {
+            WaveManager.openFiles.Add(file);
+        }
+        private static void RemoveOpenFile(WaveFile file)
+        {
+            WaveManager.openFiles.Remove(file);
+        }
+
         public static WaveFile Load(string fileName)
         {
             WaveFile file = new WaveFile();
@@ -39,6 +62,8 @@ namespace WaveManagerBusiness
                 }
                 br.Read(file.Data, 0, file.NumberOfSamples);
             }
+
+            AddOpenFile(file);
 
             return file;
         }
