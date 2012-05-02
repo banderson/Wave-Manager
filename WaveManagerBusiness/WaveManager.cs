@@ -38,7 +38,10 @@ namespace WaveManagerBusiness
         }
         private static void RemoveOpenFile(WaveFile file)
         {
-            WaveFileRepository.RemoveFile(file.filePath);
+            if (file != null)
+            {
+                WaveFileRepository.RemoveFile(file.filePath);
+            }
             ActiveFile = null;
         }
 

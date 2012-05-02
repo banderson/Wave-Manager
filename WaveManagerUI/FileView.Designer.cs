@@ -48,6 +48,7 @@
             // _fileList
             // 
             this._fileList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._fileList.FullRowSelect = true;
             this._fileList.Location = new System.Drawing.Point(0, 0);
             this._fileList.Name = "_fileList";
             this._fileList.Size = new System.Drawing.Size(204, 416);

@@ -44,14 +44,6 @@ namespace WaveManagerUI
                 {
                     //KeyPassMgr.OpenDocument(dlg.FileName);
                     WaveFile file = WaveManagerBusiness.WaveManager.OpenFile(dlg.FileName);
-                    if (file != null)
-                    {
-                        OpenExistingFile(file);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid file! Try again...");
-                    }
                 }
                 catch (Exception)
                 {
@@ -65,6 +57,13 @@ namespace WaveManagerUI
             MdiForm graphForm = new MdiForm(file);
             graphForm.MdiParent = this;
             graphForm.Show();
+
+            // start tracking the current directory
+            var directory = Path.GetDirectoryName(file.filePath);
+            WaveManagerBusiness.WaveManager.AddDirectory(directory);
+
+            // redraw the file list in the left panel
+            WaveManagerBusiness.WaveManager.FireRepaintFileList();
         }
 
         private void OnAboutClick(object sender, EventArgs e)
@@ -86,13 +85,6 @@ namespace WaveManagerUI
             {
                 f = WaveManagerBusiness.WaveManager.OpenFile(file);
             }
-
-            // start tracking the current directory
-            var directory = Path.GetDirectoryName(f.filePath);
-            WaveManagerBusiness.WaveManager.AddDirectory(directory);
-
-            // redraw the file list in the left panel
-            WaveManagerBusiness.WaveManager.FireRepaintFileList();
         }
 
         private void OnDragEnter(object sender, DragEventArgs e)

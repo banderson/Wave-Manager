@@ -18,6 +18,7 @@ namespace WaveManagerUI
             InitializeComponent();
             this.AllowDrop = true;
             WaveManagerBusiness.WaveManager.RepaintFileList += LoadFolder;
+            _fileList.ImageList = _fileListIcons;
         }
 
         private void LoadFolder()
@@ -57,13 +58,14 @@ namespace WaveManagerUI
                     //      Maybe: just add the key with a null object and then update the object when it's actually opened
                     AddFileNode(file, dirNode);
                 }
+                dirNode.ExpandAll();
             }
         }
 
         private TreeNode AddDirectoryNode(string folderName)
         {
             var node = _fileList.Nodes.Add(folderName);
-            _fileList.SelectedNode = node;
+            node.ImageIndex = node.SelectedImageIndex = 0;
 
             return node;
         }
@@ -71,6 +73,7 @@ namespace WaveManagerUI
         private TreeNode AddFileNode(string fileName, TreeNode parent)
         {
             var node = parent.Nodes.Add(Path.GetFileName(fileName));
+            node.ImageIndex = node.SelectedImageIndex = 1;
             // store the full file path so we can load the file when clicked
             node.Tag = fileName;
 
@@ -79,7 +82,15 @@ namespace WaveManagerUI
 
         private void OnDblClick(object sender, EventArgs e)
         {
-            WaveManagerBusiness.WaveManager.OpenFile(_fileList.SelectedNode.Tag.ToString());
+            if (_fileList.SelectedNode.Tag != null)
+            {
+                WaveManagerBusiness.WaveManager.OpenFile(_fileList.SelectedNode.Tag.ToString());
+            }
+        }
+
+        private void OnAfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 }
