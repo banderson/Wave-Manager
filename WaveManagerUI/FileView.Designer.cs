@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileView));
             this._btnBrowse = new System.Windows.Forms.Button();
+            this._fileList = new System.Windows.Forms.TreeView();
+            this._fileListIcons = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // _btnBrowse
@@ -41,11 +45,28 @@
             this._btnBrowse.Text = "Browse";
             this._btnBrowse.UseVisualStyleBackColor = true;
             // 
+            // _fileList
+            // 
+            this._fileList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._fileList.Location = new System.Drawing.Point(0, 0);
+            this._fileList.Name = "_fileList";
+            this._fileList.Size = new System.Drawing.Size(204, 416);
+            this._fileList.TabIndex = 1;
+            this._fileList.DoubleClick += new System.EventHandler(this.OnDblClick);
+            // 
+            // _fileListIcons
+            // 
+            this._fileListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("_fileListIcons.ImageStream")));
+            this._fileListIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this._fileListIcons.Images.SetKeyName(0, "Folder-close.ico");
+            this._fileListIcons.Images.SetKeyName(1, "Wav.ico");
+            // 
             // FileView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
+            this.Controls.Add(this._fileList);
             this.Controls.Add(this._btnBrowse);
             this.Name = "FileView";
             this.Size = new System.Drawing.Size(204, 459);
@@ -58,5 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Button _btnBrowse;
+        private System.Windows.Forms.TreeView _fileList;
+        private System.Windows.Forms.ImageList _fileListIcons;
     }
 }

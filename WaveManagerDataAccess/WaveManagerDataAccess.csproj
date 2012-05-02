@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{83E28BA0-5B89-4DE6-8E82-669525479E86}</ProjectGuid>
+    <ProjectGuid>{FB5CF394-DCD2-4691-BD8B-2070938377F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WaveManagerBusiness</RootNamespace>
-    <AssemblyName>WaveManagerBusiness</AssemblyName>
+    <RootNamespace>WaveManagerDataAccess</RootNamespace>
+    <AssemblyName>WaveManagerDataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,19 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyInfo.cs" />
-    <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WaveManager.cs" />
+    <Compile Include="WaveFileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WaveDataContracts\WaveManagerDataContracts.csproj">
       <Project>{EFB97426-33D7-4134-B846-3E3BAC1EFD36}</Project>
       <Name>WaveManagerDataContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WaveManagerDataAccess\WaveManagerDataAccess.csproj">
-      <Project>{FB5CF394-DCD2-4691-BD8B-2070938377F8}</Project>
-      <Name>WaveManagerDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

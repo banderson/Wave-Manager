@@ -11,5 +11,6 @@ namespace WaveManagerBusiness
         public delegate void FileOpenedEventHandler(WaveFile file);
         public delegate void FileClosedEventHandler(WaveFile file);
         public delegate void WindowSelectedEventHandler(WaveFile file);
+        public delegate void RepaintFileList();
     }
 }

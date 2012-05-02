@@ -6,6 +6,7 @@ using WaveDataContracts;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using WaveManagerDataAccess;
 
 namespace WaveManagerBusiness
 {
@@ -15,6 +16,7 @@ namespace WaveManagerBusiness
         public static event Events.FileOpenedEventHandler FileOpened;
         public static event Events.FileClosedEventHandler FileClosed;
         public static event Events.WindowSelectedEventHandler WindowSelected;
+        public static event Events.RepaintFileList RepaintFileList;
 
         static WaveManager()
         {
@@ -24,24 +26,34 @@ namespace WaveManagerBusiness
 
         public static WaveFile ActiveFile;
 
-
         static List<WaveFile> openFiles = new List<WaveFile>();
         public static int GetOpenFilesCount()
         {
-            return openFiles.Count;
-        }
-        public static int GetOpenFilesSamplesCount()
-        {
-            return openFiles.Sum(x => x.NumberOfSamples);
+            return WaveFileRepository.FindAll().Count();
         }
         private static void AddOpenFile(WaveFile file)
         {
-            WaveManager.openFiles.Add(file);
+            // not: even if it already exists, the reference will just be updated
+            WaveFileRepository.AddOrUpdateFile(file.filePath, file);
         }
         private static void RemoveOpenFile(WaveFile file)
         {
-            WaveManager.openFiles.Remove(file);
+            WaveFileRepository.RemoveFile(file.filePath);
             ActiveFile = null;
+        }
+
+
+        static List<string> directories = new List<string>();
+        public static List<string> GetDirectories()
+        {
+            return directories;
+        }
+        public static void AddDirectory(string directory)
+        {
+            if (!directories.Contains(directory))
+            {
+                directories.Add(directory);
+            }
         }
 
         public static WaveFile Load(string fileName)
@@ -69,22 +81,29 @@ namespace WaveManagerBusiness
                 br.Read(file.Data, 0, file.NumberOfSamples);
             }
 
+            // this will add or update the file reference in the repository
             AddOpenFile(file);
 
             return file;
         }
 
+        public static WaveFile FindFile(string fileName)
+        {
+            return WaveFileRepository.Find(fileName);
+        }
+
         public static WaveFile OpenFile(string fileName)
         {
-            WaveFile file = null;
+            WaveFile file = WaveFileRepository.Find(fileName);
 
-            try
+            // if the file is not yet loaded, then get it from disk
+            if (file == null)
             {
-                file = Load(fileName);
-            }
-            catch (FileNotFoundException)
-            {
-                //swallow it...
+                try
+                {
+                    file = Load(fileName);
+                }
+                catch (FileNotFoundException) { /* swallow it... */ }
             }
 
             FireFileOpened(file);
@@ -108,6 +127,12 @@ namespace WaveManagerBusiness
         {
             if (WindowSelected != null)
                 WindowSelected.Invoke(file);
+        }
+
+        public static void FireRepaintFileList()
+        {
+            if (RepaintFileList != null)
+                RepaintFileList.Invoke();
         }
 
         public static bool IsValid(WaveFile file)

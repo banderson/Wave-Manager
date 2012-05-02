@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WaveDataContracts;
+using System.IO;
 
 namespace WaveManagerUI
 {
@@ -16,6 +17,11 @@ namespace WaveManagerUI
         {
             InitializeComponent();
             this.AllowDrop = true;
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.FileOpened += OpenExistingFile;
         }
 
         private void OnNewGraphClick(object sender, EventArgs e)
@@ -78,11 +84,15 @@ namespace WaveManagerUI
             WaveFile f = new WaveFile();
             foreach (string file in files)
             {
-                f = WaveManagerBusiness.WaveManager.Load(file);
-                OpenExistingFile(f);
+                f = WaveManagerBusiness.WaveManager.OpenFile(file);
             }
 
-            WaveManagerBusiness.WaveManager.FireFileOpened(f);
+            // start tracking the current directory
+            var directory = Path.GetDirectoryName(f.filePath);
+            WaveManagerBusiness.WaveManager.AddDirectory(directory);
+
+            // redraw the file list in the left panel
+            WaveManagerBusiness.WaveManager.FireRepaintFileList();
         }
 
         private void OnDragEnter(object sender, DragEventArgs e)
