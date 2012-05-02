@@ -13,6 +13,7 @@ namespace WaveManagerBusiness
     {
         /*** Events ***/
         public static event Events.FileOpenedEventHandler FileOpened;
+        public static event Events.FileClosedEventHandler FileClosed;
 
         public static WaveFile Load(string fileName)
         {
@@ -64,6 +65,12 @@ namespace WaveManagerBusiness
         {
             if (FileOpened != null)
                 FileOpened.Invoke(file);
+        }
+
+        public static void FireFileClosed(WaveFile file)
+        {
+            if (FileClosed != null)
+                FileClosed.Invoke(file);
         }
 
         public static bool IsValid(WaveFile file)

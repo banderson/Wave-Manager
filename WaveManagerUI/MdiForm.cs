@@ -32,5 +32,15 @@ namespace WaveManagerUI
                 this.Text = "(New File)";
             }
         }
+
+        private void MdiForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClosed(object sender, FormClosedEventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.FireFileClosed(Wave);
+        }
     }
 }

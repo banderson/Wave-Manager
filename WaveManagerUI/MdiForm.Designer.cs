@@ -48,6 +48,8 @@
             this.Controls.Add(this._graphView);
             this.Name = "MdiForm";
             this.Text = "Graph";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
+            this.Load += new System.EventHandler(this.MdiForm_Load);
             this.ResumeLayout(false);
 
         }
