@@ -112,8 +112,8 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.fileView1 = new WaveManagerUI.FileView();
-            this._fileView = new WaveManagerUI.FileView();
             this._statusBar = new WaveManagerUI.StatusBar();
+            this._fileView = new WaveManagerUI.FileView();
             this._menuBar.SuspendLayout();
             this._toolbar.SuspendLayout();
             this.SuspendLayout();
@@ -341,7 +341,7 @@
             this._toolbarToggle.Checked = true;
             this._toolbarToggle.CheckState = System.Windows.Forms.CheckState.Checked;
             this._toolbarToggle.Name = "_toolbarToggle";
-            this._toolbarToggle.Size = new System.Drawing.Size(138, 22);
+            this._toolbarToggle.Size = new System.Drawing.Size(152, 22);
             this._toolbarToggle.Text = "Toolbar";
             this._toolbarToggle.Click += new System.EventHandler(this.OnToolbarToggle);
             // 
@@ -350,20 +350,21 @@
             this._statusToggle.Checked = true;
             this._statusToggle.CheckState = System.Windows.Forms.CheckState.Checked;
             this._statusToggle.Name = "_statusToggle";
-            this._statusToggle.Size = new System.Drawing.Size(138, 22);
+            this._statusToggle.Size = new System.Drawing.Size(152, 22);
             this._statusToggle.Text = "Status Bar";
             this._statusToggle.Click += new System.EventHandler(this.OnStatusToggle);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // fullNormalToolStripMenuItem
             // 
             this.fullNormalToolStripMenuItem.Name = "fullNormalToolStripMenuItem";
-            this.fullNormalToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.fullNormalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fullNormalToolStripMenuItem.Text = "Full/Normal";
+            this.fullNormalToolStripMenuItem.Click += new System.EventHandler(this.OnViewModeToggle);
             // 
             // formatToolStripMenuItem
             // 
@@ -657,6 +658,7 @@
             this.toolStripButton2.Size = new System.Drawing.Size(75, 51);
             this.toolStripButton2.Text = "Full/Normal";
             this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton2.Click += new System.EventHandler(this.OnViewModeToggle);
             // 
             // toolStripSeparator4
             // 
@@ -795,6 +797,15 @@
             this.fileView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
             this.fileView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             // 
+            // _statusBar
+            // 
+            this._statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._statusBar.Location = new System.Drawing.Point(3, 668);
+            this._statusBar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this._statusBar.Name = "_statusBar";
+            this._statusBar.Size = new System.Drawing.Size(1087, 47);
+            this._statusBar.TabIndex = 8;
+            // 
             // _fileView
             // 
             this._fileView.AllowDrop = true;
@@ -805,15 +816,6 @@
             this._fileView.Name = "_fileView";
             this._fileView.Size = new System.Drawing.Size(238, 601);
             this._fileView.TabIndex = 5;
-            // 
-            // _statusBar
-            // 
-            this._statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._statusBar.Location = new System.Drawing.Point(3, 668);
-            this._statusBar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this._statusBar.Name = "_statusBar";
-            this._statusBar.Size = new System.Drawing.Size(1087, 47);
-            this._statusBar.TabIndex = 8;
             // 
             // MdiMainForm
             // 

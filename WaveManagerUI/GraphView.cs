@@ -8,27 +8,56 @@ using System.Text;
 using System.Windows.Forms;
 using WaveDataContracts;
 using System.IO;
+using WaveManagerUtil;
 
 namespace WaveManagerUI
 {
     public partial class GraphView : UserControl
     {
         public WaveFile Wave;
+        public RenderStyle RenderStrategy { get; set; }
+
+        public enum RenderStyle
+        {
+            Standard,
+            Full
+        }
 
         public GraphView()
         {
             InitializeComponent();
+            RenderStrategy = RenderStyle.Standard;
+            WaveManagerBusiness.WaveManager.ViewModeChanged += AdjustViewMode;
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             if (Wave == null) return;
 
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); 
+            SetStyle(ControlStyles.OptimizedDoubleBuffer,true); 
+            SetStyle(ControlStyles.UserPaint, true);
+
             Graphics g = e.Graphics;
 
+            // the maximum sample in the set
+            int maxValue = Wave.Data.Max();
+
             // setup the scrolling mechanism
-            AutoScrollMinSize = new Size(Wave.NumberOfSamples, 255);
-            g.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
+            switch (RenderStrategy)
+            {
+                case RenderStyle.Standard:
+                    AutoScrollMinSize = new Size(Wave.NumberOfSamples, maxValue);
+                    g.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
+                    break;
+                case RenderStyle.Full:
+                    AutoScrollMinSize = ClientRectangle.Size;
+                    float xScaleFactor = (float)ClientRectangle.Size.Width / Wave.NumberOfSamples;
+                    float yScaleFactor = (float)ClientRectangle.Size.Height / maxValue;
+                    g.ScaleTransform(xScaleFactor, yScaleFactor);
+                    break;
+            }
 
             // plot the wave file data
             if (WaveManagerBusiness.WaveManager.IsValid(Wave))
@@ -43,7 +72,19 @@ namespace WaveManagerUI
                 Font myFont = new Font("Times New Roman", 16);
                 g.DrawString("Invalid file: "+ Wave.fileName, myFont, Brushes.Black, 10, 10);
             }
+        }
 
+        private void AdjustViewMode()
+        {
+            // this should only apply to the currently selected window
+            if (Wave != WaveManagerBusiness.WaveManager.GetActiveFile())
+                return;
+
+            // toggle the render mode
+            RenderStrategy = (RenderStrategy == RenderStyle.Full)
+                                ? RenderStyle.Standard
+                                : RenderStyle.Full;
+            Invalidate();
         }
     }
 }

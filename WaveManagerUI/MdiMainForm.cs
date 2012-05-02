@@ -103,5 +103,10 @@ namespace WaveManagerUI
             _statusToggle.Checked = !_statusToggle.Checked;
             _statusBar.Visible = _statusToggle.Checked;
         }
+
+        private void OnViewModeToggle(object sender, EventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.FireViewModeChanged();
+        }
     }
 }

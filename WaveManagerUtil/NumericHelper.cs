@@ -19,5 +19,12 @@ namespace WaveManagerUtil
                 ? first
                 : second;
         }
+
+        public static int Greater(int first, int second)
+        {
+            return (first > second)
+                ? first
+                : second;
+        }
     }
 }

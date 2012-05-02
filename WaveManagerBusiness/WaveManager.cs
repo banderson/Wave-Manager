@@ -17,6 +17,7 @@ namespace WaveManagerBusiness
         public static event Events.FileClosedEventHandler FileClosed;
         public static event Events.WindowSelectedEventHandler WindowSelected;
         public static event Events.RepaintFileList RepaintFileList;
+        public static event Events.ViewModeChange ViewModeChanged;
 
         static WaveManager()
         {
@@ -136,6 +137,12 @@ namespace WaveManagerBusiness
         {
             if (RepaintFileList != null)
                 RepaintFileList.Invoke();
+        }
+
+        public static void FireViewModeChanged()
+        {
+            if (ViewModeChanged != null)
+                ViewModeChanged.Invoke();
         }
 
         public static bool IsValid(WaveFile file)
