@@ -91,5 +91,17 @@ namespace WaveManagerUI
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
+
+        private void OnToolbarToggle(object sender, EventArgs e)
+        {
+            _toolbarToggle.Checked = !_toolbarToggle.Checked;
+            _toolbar.Visible = _toolbarToggle.Checked;
+        }
+
+        private void OnStatusToggle(object sender, EventArgs e)
+        {
+            _statusToggle.Checked = !_statusToggle.Checked;
+            _statusBar.Visible = _statusToggle.Checked;
+        }
     }
 }

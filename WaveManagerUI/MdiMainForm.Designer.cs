@@ -55,8 +55,8 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._toolbarToggle = new System.Windows.Forms.ToolStripMenuItem();
+            this._statusToggle = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.fullNormalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +112,6 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.fileView1 = new WaveManagerUI.FileView();
-            this.statusBar1 = new WaveManagerUI.StatusBar();
             this._fileView = new WaveManagerUI.FileView();
             this._statusBar = new WaveManagerUI.StatusBar();
             this._menuBar.SuspendLayout();
@@ -329,25 +328,31 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customizeToolStripMenuItem,
-            this.optionsToolStripMenuItem,
+            this._toolbarToggle,
+            this._statusToggle,
             this.toolStripMenuItem1,
             this.fullNormalToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 19);
             this.toolsToolStripMenuItem.Text = "&View";
             // 
-            // customizeToolStripMenuItem
+            // _toolbarToggle
             // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.customizeToolStripMenuItem.Text = "Toolbar";
+            this._toolbarToggle.Checked = true;
+            this._toolbarToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._toolbarToggle.Name = "_toolbarToggle";
+            this._toolbarToggle.Size = new System.Drawing.Size(138, 22);
+            this._toolbarToggle.Text = "Toolbar";
+            this._toolbarToggle.Click += new System.EventHandler(this.OnToolbarToggle);
             // 
-            // optionsToolStripMenuItem
+            // _statusToggle
             // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.optionsToolStripMenuItem.Text = "Status Bar";
+            this._statusToggle.Checked = true;
+            this._statusToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._statusToggle.Name = "_statusToggle";
+            this._statusToggle.Size = new System.Drawing.Size(138, 22);
+            this._statusToggle.Text = "Status Bar";
+            this._statusToggle.Click += new System.EventHandler(this.OnStatusToggle);
             // 
             // toolStripMenuItem1
             // 
@@ -785,19 +790,10 @@
             this.fileView1.Location = new System.Drawing.Point(3, 79);
             this.fileView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fileView1.Name = "fileView1";
-            this.fileView1.Size = new System.Drawing.Size(204, 600);
+            this.fileView1.Size = new System.Drawing.Size(204, 589);
             this.fileView1.TabIndex = 9;
             this.fileView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
             this.fileView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
-            // 
-            // statusBar1
-            // 
-            this.statusBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusBar1.Location = new System.Drawing.Point(3, 679);
-            this.statusBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.statusBar1.Name = "statusBar1";
-            this.statusBar1.Size = new System.Drawing.Size(1087, 36);
-            this.statusBar1.TabIndex = 8;
             // 
             // _fileView
             // 
@@ -813,11 +809,11 @@
             // _statusBar
             // 
             this._statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._statusBar.Location = new System.Drawing.Point(0, 680);
-            this._statusBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._statusBar.Location = new System.Drawing.Point(3, 668);
+            this._statusBar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._statusBar.Name = "_statusBar";
-            this._statusBar.Size = new System.Drawing.Size(1090, 35);
-            this._statusBar.TabIndex = 4;
+            this._statusBar.Size = new System.Drawing.Size(1087, 47);
+            this._statusBar.TabIndex = 8;
             // 
             // MdiMainForm
             // 
@@ -825,7 +821,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1090, 715);
             this.Controls.Add(this.fileView1);
-            this.Controls.Add(this.statusBar1);
+            this.Controls.Add(this._statusBar);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this._toolbar);
             this.Controls.Add(this._menuBar);
@@ -870,8 +866,8 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _toolbarToggle;
+        private System.Windows.Forms.ToolStripMenuItem _statusToggle;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -887,7 +883,6 @@
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private StatusBar _statusBar;
         private FileView _fileView;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
@@ -934,7 +929,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
-        private StatusBar statusBar1;
         private FileView fileView1;
+        private StatusBar _statusBar;
     }
 }
