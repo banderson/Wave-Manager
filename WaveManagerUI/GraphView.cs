@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using WaveDataContracts;
 using System.IO;
 using WaveManagerUtil;
+using WaveManagerBusiness;
 
 namespace WaveManagerUI
 {
@@ -27,12 +28,21 @@ namespace WaveManagerUI
         {
             InitializeComponent();
             RenderStrategy = RenderStyle.Standard;
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
             WaveManagerBusiness.WaveManager.ViewModeChanged += AdjustViewMode;
+            WaveManagerBusiness.WaveManager.AppSettingsChanged += RePaint;
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             if (Wave == null) return;
+
+            AppSettings settings = WaveManagerBusiness.WaveManager.GetSettings();
+
+            this.BackColor = settings.canvasColor;
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); 
@@ -62,9 +72,10 @@ namespace WaveManagerUI
             // plot the wave file data
             if (WaveManagerBusiness.WaveManager.IsValid(Wave))
             {
+                Pen p = new Pen(settings.lineColor, settings.lineWidth);
                 for (int i = 0; i < Wave.NumberOfSamples - 1; i++)
                 {
-                    g.DrawLine(Pens.Black, i, Wave.Data[i], i + 1, Wave.Data[i + 1]);
+                    g.DrawLine(p, i, Wave.Data[i], i + 1, Wave.Data[i + 1]);
                 }
             }
             else
@@ -84,6 +95,11 @@ namespace WaveManagerUI
             RenderStrategy = (RenderStrategy == RenderStyle.Full)
                                 ? RenderStyle.Standard
                                 : RenderStyle.Full;
+            RePaint();
+        }
+
+        private void RePaint()
+        {
             Invalidate();
         }
     }

@@ -10,19 +10,34 @@ using WaveManagerDataAccess;
 
 namespace WaveManagerBusiness
 {
-    public static class WaveManager
+    public static partial class WaveManager
     {
-        /*** Events ***/
-        public static event Events.FileOpenedEventHandler FileOpened;
-        public static event Events.FileClosedEventHandler FileClosed;
-        public static event Events.WindowSelectedEventHandler WindowSelected;
-        public static event Events.RepaintFileList RepaintFileList;
-        public static event Events.ViewModeChange ViewModeChanged;
 
         static WaveManager()
         {
             FileClosed += RemoveOpenFile;
             WindowSelected += SetActiveFile;
+            AppSettingsChanged += SerializeSettings;
+
+            _settings = new AppSettings();
+            _settingsFile = Path.GetFullPath(".") + Path.DirectorySeparatorChar + "settings.config";
+
+            if (File.Exists(_settingsFile))
+            {
+                _settings = DeserializeSettings();
+            }
+        }
+
+        static AppSettings _settings;
+        static string _settingsFile;
+        public static AppSettings GetSettings()
+        {
+            return _settings;
+        }
+        public static void UpdateSettings(Action<AppSettings> lambda)
+        {
+            lambda.Invoke(_settings);
+            FireAppSettingsChanged();
         }
 
         public static WaveFile ActiveFile;
@@ -115,36 +130,6 @@ namespace WaveManagerBusiness
             return file;
         }
 
-        public static void FireFileOpened(WaveFile file)
-        {
-            if (FileOpened != null)
-                FileOpened.Invoke(file);
-        }
-
-        public static void FireFileClosed(WaveFile file)
-        {
-            if (FileClosed != null)
-                FileClosed.Invoke(file);
-        }
-
-        public static void FireWindowSelected(WaveFile file)
-        {
-            if (WindowSelected != null)
-                WindowSelected.Invoke(file);
-        }
-
-        public static void FireRepaintFileList()
-        {
-            if (RepaintFileList != null)
-                RepaintFileList.Invoke();
-        }
-
-        public static void FireViewModeChanged()
-        {
-            if (ViewModeChanged != null)
-                ViewModeChanged.Invoke();
-        }
-
         public static bool IsValid(WaveFile file)
         {
             // first 4-bytes from header (there are probably many other better ways to do this...)
@@ -168,6 +153,27 @@ namespace WaveManagerBusiness
             return (ActiveFile == null)
                 ? new WaveFile()
                 : ActiveFile;
+        }
+
+        private static void SerializeSettings()
+        {
+            using (var fileStream = new FileStream(_settingsFile, FileMode.Create))
+            {
+                // serialize file to disk
+                var bf = new BinaryFormatter();
+                bf.Serialize(fileStream, _settings);
+            }
+        }
+
+        private static AppSettings DeserializeSettings()
+        {
+            using (var fileStream = new FileStream(_settingsFile, FileMode.Open))
+            {
+                var bf = new BinaryFormatter();
+                _settings = (AppSettings)bf.Deserialize(fileStream);
+            }
+
+            return _settings;
         }
     }
 }

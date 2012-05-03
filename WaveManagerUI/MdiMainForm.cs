@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using WaveDataContracts;
 using System.IO;
+using WaveManagerBusiness;
 
 namespace WaveManagerUI
 {
@@ -107,6 +108,36 @@ namespace WaveManagerUI
         private void OnViewModeToggle(object sender, EventArgs e)
         {
             WaveManagerBusiness.WaveManager.FireViewModeChanged();
+        }
+
+        private void OnBackgroundColorClick(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.canvasColor = dlg.Color);
+            }
+        }
+
+        private void OnLineColorClick(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.lineColor = dlg.Color);
+            }
+        }
+
+        private void OnLineThicknessChange(object sender, EventArgs e)
+        {
+            // if the update was made, then update the app settings
+            short width = 1;
+            if (Int16.TryParse(sender.ToString(), out width))
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.lineWidth = width);
         }
     }
 }
