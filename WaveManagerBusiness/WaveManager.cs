@@ -77,33 +77,12 @@ namespace WaveManagerBusiness
 
         public static WaveFile Load(string fileName)
         {
-            WaveFile file = new WaveFile();
-            file.fileName = fileName;
-            file.filePath = fileName;
-
-            using (FileStream fs = new FileStream(fileName, FileMode.Open))
-            using (BinaryReader br = new BinaryReader(fs))
-            {
-                br.Read(file.Header, 0, WaveFile.HEADER_SIZE);
-                file.NumberOfSamples = br.ReadInt32();
-                try
-                {
-                    // allocates array size, otherwise will crash 
-                    file.Data = new byte[file.NumberOfSamples]; 
-                }
-                catch (Exception)
-                {
-                    // don't load any data...
-                    file.NumberOfSamples = 0;
-                    file.Data = new byte[0];
-                }
-                br.Read(file.Data, 0, file.NumberOfSamples);
-            }
+            var wave = new WaveFile(fileName);
 
             // this will add or update the file reference in the repository
-            AddOpenFile(file);
+            AddOpenFile(wave);
 
-            return file;
+            return wave;
         }
 
         public static WaveFile FindFile(string fileName)

@@ -30,5 +30,10 @@ namespace WaveManagerBusiness
             canvasColor = Color.CornflowerBlue;
             lineColor = Color.BlanchedAlmond;
         }
+
+        public void Modulate()
+        {
+
+        }
     }
 }
