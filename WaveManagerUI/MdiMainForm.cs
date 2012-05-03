@@ -141,5 +141,15 @@ namespace WaveManagerUI
             if (Int16.TryParse(sender.ToString(), out width))
                 WaveManagerBusiness.WaveManager.UpdateSettings(s => s.lineWidth = width);
         }
+
+        private void OnModulate(object sender, EventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.ModulateWave();
+        }
+
+        private void OnRotateClick(object sender, EventArgs e)
+        {
+            WaveManagerBusiness.WaveManager.RotateWave();
+        }
     }
 }

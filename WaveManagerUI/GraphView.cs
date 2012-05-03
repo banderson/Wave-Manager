@@ -34,11 +34,12 @@ namespace WaveManagerUI
         {
             WaveManagerBusiness.WaveManager.ViewModeChanged += AdjustViewMode;
             WaveManagerBusiness.WaveManager.AppSettingsChanged += RePaint;
+            WaveManagerBusiness.WaveManager.CurrentWindowModified += RePaintCurrent;
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            if (Wave == null) return;
+            if (Wave == null || !Wave.IsValid()) return;
 
             AppSettings settings = WaveManagerBusiness.WaveManager.GetSettings();
 
@@ -95,6 +96,15 @@ namespace WaveManagerUI
             RenderStrategy = (RenderStrategy == RenderStyle.Full)
                                 ? RenderStyle.Standard
                                 : RenderStyle.Full;
+            RePaint();
+        }
+
+        private void RePaintCurrent()
+        {
+            // this should only apply to the currently selected window
+            if (Wave != WaveManagerBusiness.WaveManager.GetActiveFile())
+                return;
+
             RePaint();
         }
 

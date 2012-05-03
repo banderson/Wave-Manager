@@ -111,15 +111,7 @@ namespace WaveManagerBusiness
 
         public static bool IsValid(WaveFile file)
         {
-            // first 4-bytes from header (there are probably many other better ways to do this...)
-            var test = "";
-            for (int i = 0; i < 4; i++)
-            {
-                test += (char)file.Header[i];
-            }
-
-            // check if the first 4 bytes of the header are "RIFF"
-            return test == WaveFile.HEADER_PREFIX;
+            return file.IsValid();
         }
 
         public static void SetActiveFile(WaveFile file)
@@ -132,6 +124,24 @@ namespace WaveManagerBusiness
             return (ActiveFile == null)
                 ? new WaveFile()
                 : ActiveFile;
+        }
+
+        public static void ModulateWave()
+        {
+            WaveFile file = GetActiveFile();
+
+            file.Modulate();
+
+            FireCurrentWindowModified();
+        }
+
+        public static void RotateWave()
+        {
+            WaveFile file = GetActiveFile();
+
+            file.Flip();
+
+            FireCurrentWindowModified();
         }
 
         private static void SerializeSettings()

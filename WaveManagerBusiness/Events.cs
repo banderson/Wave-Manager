@@ -16,6 +16,7 @@ namespace WaveManagerBusiness
         public delegate void ViewModeChangeEventHandler();
         public delegate void AppSettingsChangedEventHandler();
         public delegate void ConfigSettingsChangedEventHandler();
+        public delegate void CurrentWindowModifiedEventHandler();
 
 
         /*** Events ***/
@@ -26,6 +27,7 @@ namespace WaveManagerBusiness
         public static event ViewModeChangeEventHandler ViewModeChanged;
         public static event AppSettingsChangedEventHandler AppSettingsChanged;
         public static event ConfigSettingsChangedEventHandler ConfigSettingsChanged;
+        public static event CurrentWindowModifiedEventHandler CurrentWindowModified;
 
 
         /*** Invoke Event Callbacks ***/
@@ -70,6 +72,12 @@ namespace WaveManagerBusiness
         {
             if (ConfigSettingsChanged != null)
                 ConfigSettingsChanged.Invoke();
+        }
+
+        public static void FireCurrentWindowModified()
+        {
+            if (CurrentWindowModified != null)
+                CurrentWindowModified.Invoke();
         }
     }
 }

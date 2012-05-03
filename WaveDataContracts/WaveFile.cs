@@ -54,5 +54,51 @@ namespace WaveDataContracts
                 br.Read(this.Data, 0, this.NumberOfSamples);
             }
         }
+
+        public void Modulate()
+        {
+            if (!IsValid())
+                return;
+
+            for (int i = 0; i < NumberOfSamples - 1; i++)
+            {
+                Data[i] = (byte)(Math.Sin(i+3.2f)*20 + Data[i]);
+            }
+        }
+
+        public void Flip()
+        {
+            if (!IsValid())
+                return;
+
+            for (int i = 0; i < NumberOfSamples - 1; i++)
+            {
+                Data[i] = (byte)(255 - Data[i]);
+            }
+        }
+
+        private void ForEachByte(Action<byte> operation)
+        {
+            if (!IsValid())
+                return;
+
+            for (int i = 0; i < NumberOfSamples - 1; i++)
+            {
+                operation.Invoke(Data[i]);
+            }
+        }
+
+        public Boolean IsValid()
+        {
+            // first 4-bytes from header (there are probably many other better ways to do this...)
+            var test = "";
+            for (int i = 0; i < 4; i++)
+            {
+                test += (char)Header[i];
+            }
+
+            // check if the first 4 bytes of the header are "RIFF"
+            return test == WaveFile.HEADER_PREFIX;
+        }
     }
 }

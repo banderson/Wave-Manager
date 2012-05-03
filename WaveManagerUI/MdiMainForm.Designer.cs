@@ -682,6 +682,7 @@
             this.toolStripButton3.Size = new System.Drawing.Size(62, 51);
             this.toolStripButton3.Text = "Modulate";
             this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton3.Click += new System.EventHandler(this.OnModulate);
             // 
             // toolStripButton6
             // 
@@ -691,6 +692,7 @@
             this.toolStripButton6.Size = new System.Drawing.Size(45, 51);
             this.toolStripButton6.Text = "Rotate";
             this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton6.Click += new System.EventHandler(this.OnRotateClick);
             // 
             // toolStripSeparator8
             // 
@@ -740,28 +742,28 @@
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem11.Text = "1";
             this.toolStripMenuItem11.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem12.Text = "2";
             this.toolStripMenuItem12.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem13.Text = "4";
             this.toolStripMenuItem13.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem14.Text = "8";
             this.toolStripMenuItem14.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
