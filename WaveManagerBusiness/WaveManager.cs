@@ -18,6 +18,7 @@ namespace WaveManagerBusiness
             FileClosed += RemoveOpenFile;
             WindowSelected += SetActiveFile;
             AppSettingsChanged += SerializeSettings;
+            CurrentWindowModified += MarkAsModified;
 
             _settings = new AppSettings();
             _settingsFile = Path.GetFullPath(".") + Path.DirectorySeparatorChar + "settings.config";
@@ -83,6 +84,23 @@ namespace WaveManagerBusiness
             AddOpenFile(wave);
 
             return wave;
+        }
+
+        public static Boolean IsCurrentDocumentBlank()
+        {
+            return ActiveFile == null || ActiveFile.IsEmpty();
+        }
+
+        // this indicates whether the file has changed since last save
+        public static bool IsCurrentDocumentModified()
+        {
+            return ActiveFile != null && ActiveFile.IsModified();
+        }
+
+        // this indicates whether the file has changed since last save
+        public static void MarkAsModified()
+        {
+            ActiveFile.MarkAsModified();
         }
 
         public static WaveFile FindFile(string fileName)

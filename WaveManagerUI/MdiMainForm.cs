@@ -9,11 +9,15 @@ using System.Windows.Forms;
 using WaveDataContracts;
 using System.IO;
 using WaveManagerBusiness;
+using System.Media;
 
 namespace WaveManagerUI
 {
     public partial class MdiMainForm : Form
     {
+
+        List<ToolStripItem> hideIfBlank, hideIfUnModified;
+
         public MdiMainForm()
         {
             InitializeComponent();
@@ -23,6 +27,17 @@ namespace WaveManagerUI
         private void OnLoad(object sender, EventArgs e)
         {
             WaveManagerBusiness.WaveManager.FileOpened += OpenExistingFile;
+            WaveManagerBusiness.WaveManager.WindowSelected += UpdateToolbarOptionsForCurrentWindow;
+            WaveManagerBusiness.WaveManager.FileClosed += UpdateToolbarOptionsForCurrentWindow;
+            WaveManagerBusiness.WaveManager.CurrentWindowModified += UpdateToolbarOptionsForCurrentWindow;
+
+            hideIfBlank = new List<ToolStripItem> 
+                                {   _btnCopy, _btnCut, _btnPaste, _btnDelete, _btnModule, 
+                                    _btnRotate, _btnPlay, _btnPrint, _btnSave, _btnViewMode };
+
+            hideIfUnModified = new List<ToolStripItem> { _btnSave };
+
+            UpdateToolbarOptionsForCurrentWindow();
         }
 
         private void OnNewGraphClick(object sender, EventArgs e)
@@ -150,6 +165,26 @@ namespace WaveManagerUI
         private void OnRotateClick(object sender, EventArgs e)
         {
             WaveManagerBusiness.WaveManager.RotateWave();
+        }
+
+        private void UpdateToolbarOptionsForCurrentWindow(WaveFile file)
+        {
+            UpdateToolbarOptionsForCurrentWindow();
+        }
+
+        private void UpdateToolbarOptionsForCurrentWindow()
+        {
+            hideIfBlank.ForEach(b => b.Enabled = !WaveManagerBusiness.WaveManager.IsCurrentDocumentBlank());
+            hideIfUnModified.ForEach(b => b.Enabled = WaveManagerBusiness.WaveManager.IsCurrentDocumentModified());
+        }
+
+        private void OnPlay(object sender, EventArgs e)
+        {
+            if (WaveManagerBusiness.WaveManager.ActiveFile.IsModified())
+                MessageBox.Show("You must save the current file first.");
+
+            // this should play the actively selected file
+            new SoundPlayer(WaveManagerBusiness.WaveManager.ActiveFile.filePath).Play();
         }
     }
 }

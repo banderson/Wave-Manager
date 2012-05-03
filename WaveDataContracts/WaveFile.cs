@@ -18,6 +18,8 @@ namespace WaveDataContracts
         public string fileName { get; set; }
         public string filePath { get; set; }
 
+        private Boolean _isModified = false;
+
         public WaveFile()
         {
             NumberOfSamples = 0;
@@ -88,6 +90,21 @@ namespace WaveDataContracts
 
             // check if the first 4 bytes of the header are "RIFF"
             return test == WaveFile.HEADER_PREFIX;
+        }
+
+        public Boolean IsEmpty()
+        {
+            return NumberOfSamples == 0;
+        }
+
+        public bool IsModified()
+        {
+            return _isModified;
+        }
+
+        public void MarkAsModified()
+        {
+            _isModified = true;
         }
     }
 }

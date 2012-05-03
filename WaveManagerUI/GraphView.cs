@@ -17,6 +17,7 @@ namespace WaveManagerUI
     {
         public WaveFile Wave;
         public RenderStyle RenderStrategy { get; set; }
+        AppSettings settings;
 
         public enum RenderStyle
         {
@@ -35,15 +36,15 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.ViewModeChanged += AdjustViewMode;
             WaveManagerBusiness.WaveManager.AppSettingsChanged += RePaint;
             WaveManagerBusiness.WaveManager.CurrentWindowModified += RePaintCurrent;
+            settings = WaveManagerBusiness.WaveManager.GetSettings();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            if (Wave == null || !Wave.IsValid()) return;
-
-            AppSettings settings = WaveManagerBusiness.WaveManager.GetSettings();
-
             this.BackColor = settings.canvasColor;
+            
+            // bail now if there is no wave file to draw
+            if (Wave == null || !Wave.IsValid()) return;
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); 
