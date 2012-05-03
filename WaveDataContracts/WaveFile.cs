@@ -77,17 +77,6 @@ namespace WaveDataContracts
             }
         }
 
-        private void ForEachByte(Action<byte> operation)
-        {
-            if (!IsValid())
-                return;
-
-            for (int i = 0; i < NumberOfSamples - 1; i++)
-            {
-                operation.Invoke(Data[i]);
-            }
-        }
-
         public Boolean IsValid()
         {
             // first 4-bytes from header (there are probably many other better ways to do this...)
