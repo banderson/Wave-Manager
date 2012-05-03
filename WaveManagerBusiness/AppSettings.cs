@@ -24,8 +24,8 @@ namespace WaveManagerBusiness
         public AppSettings()
         {
             bgColor = Color.Azure;
-            textColor = Color.WhiteSmoke;
-            font = new Font("Helvetica", 48.0f);
+            textColor = Color.Black;
+            font = new Font("Helvetica", 12.0f);
 
             canvasColor = Color.CornflowerBlue;
             lineColor = Color.BlanchedAlmond;

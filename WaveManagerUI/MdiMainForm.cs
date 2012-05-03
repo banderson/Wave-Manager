@@ -113,6 +113,7 @@ namespace WaveManagerUI
         private void OnBackgroundColorClick(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
+            dlg.Color = WaveManagerBusiness.WaveManager.GetSettings().canvasColor;
 
             // If the file name is not an empty string open it for saving.
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -124,6 +125,7 @@ namespace WaveManagerUI
         private void OnLineColorClick(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
+            dlg.Color = WaveManagerBusiness.WaveManager.GetSettings().lineColor;
 
             // If the file name is not an empty string open it for saving.
             if (dlg.ShowDialog() == DialogResult.OK)

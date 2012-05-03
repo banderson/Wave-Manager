@@ -33,6 +33,10 @@
             this._btnBrowse = new System.Windows.Forms.Button();
             this._fileList = new System.Windows.Forms.TreeView();
             this._fileListIcons = new System.Windows.Forms.ImageList(this.components);
+            this._settingsContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._settingsContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // _btnBrowse
@@ -48,12 +52,12 @@
             // _fileList
             // 
             this._fileList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._fileList.FullRowSelect = true;
             this._fileList.Location = new System.Drawing.Point(0, 0);
             this._fileList.Name = "_fileList";
             this._fileList.Size = new System.Drawing.Size(204, 416);
             this._fileList.TabIndex = 1;
             this._fileList.DoubleClick += new System.EventHandler(this.OnDblClick);
+            this._fileList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnRightClick);
             // 
             // _fileListIcons
             // 
@@ -61,6 +65,28 @@
             this._fileListIcons.TransparentColor = System.Drawing.Color.Transparent;
             this._fileListIcons.Images.SetKeyName(0, "Folder-close.ico");
             this._fileListIcons.Images.SetKeyName(1, "Wav.ico");
+            // 
+            // _settingsContext
+            // 
+            this._settingsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fontToolStripMenuItem,
+            this.backgroundColorToolStripMenuItem});
+            this._settingsContext.Name = "contextMenuStrip1";
+            this._settingsContext.Size = new System.Drawing.Size(180, 48);
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.fontToolStripMenuItem.Text = "Font...";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.OnFontChangeClick);
+            // 
+            // backgroundColorToolStripMenuItem
+            // 
+            this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.backgroundColorToolStripMenuItem.Text = "Background Color...";
+            this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.OnBGChangeClick);
             // 
             // FileView
             // 
@@ -72,7 +98,7 @@
             this.Name = "FileView";
             this.Size = new System.Drawing.Size(204, 459);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
+            this._settingsContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -82,5 +108,8 @@
         private System.Windows.Forms.Button _btnBrowse;
         private System.Windows.Forms.TreeView _fileList;
         private System.Windows.Forms.ImageList _fileListIcons;
+        private System.Windows.Forms.ContextMenuStrip _settingsContext;
+        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
     }
 }

@@ -8,32 +8,36 @@ using System.Text;
 using System.Windows.Forms;
 using WaveDataContracts;
 using System.IO;
+using WaveManagerBusiness;
 
 namespace WaveManagerUI
 {
     public partial class FileView : UserControl
     {
+        AppSettings _settings = WaveManagerBusiness.WaveManager.GetSettings();
+
         public FileView()
         {
             InitializeComponent();
             this.AllowDrop = true;
-            WaveManagerBusiness.WaveManager.RepaintFileList += LoadFolder;
+            WaveManagerBusiness.WaveManager.RepaintFileList += InitPanel;
             _fileList.ImageList = _fileListIcons;
+            _fileList.BackColor = _settings.bgColor;
+            _fileList.Font = _settings.font;
+            _fileList.ForeColor = _settings.textColor;
         }
 
-        private void LoadFolder()
+        private void InitPanel()
         {
+            _fileList.BackColor = _settings.bgColor;
+            _fileList.Font = _settings.font;
+            _fileList.ForeColor = _settings.textColor;
             RedrawFiles();
         }
 
         private void OnDragDrop(object sender, DragEventArgs e)
         {
             MessageBox.Show(e.Data.ToString());
-        }
-
-        private void OnDragEnter(object sender, DragEventArgs e)
-        {
-
         }
 
         private void RedrawFiles()
@@ -88,9 +92,43 @@ namespace WaveManagerUI
             }
         }
 
-        private void OnAfterSelect(object sender, TreeViewEventArgs e)
+        private void OnFontChangeClick(object sender, EventArgs e)
         {
+            FontDialog dlg = new FontDialog();
+            dlg.ShowColor = true;
+            dlg.Color = _settings.textColor;
+            dlg.Font = _settings.font;
 
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.font = dlg.Font);
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.textColor = dlg.Color);
+            }
+
+            InitPanel();
+        }
+
+        private void OnBGChangeClick(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = _settings.bgColor;
+
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                WaveManagerBusiness.WaveManager.UpdateSettings(s => s.bgColor = dlg.Color);
+            }
+
+            InitPanel();
+        }
+
+        private void OnRightClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _settingsContext.Show(_fileList, e.X, e.Y);
+            }
         }
     }
 }
