@@ -10,6 +10,7 @@ using WaveDataContracts;
 using System.IO;
 using WaveManagerUtil;
 using WaveManagerBusiness;
+using System.Drawing.Imaging;
 
 namespace WaveManagerUI
 {
@@ -18,6 +19,7 @@ namespace WaveManagerUI
         public WaveFile Wave;
         public RenderStyle RenderStrategy { get; set; }
         AppSettings settings;
+        Pen pen;
 
         public enum RenderStyle
         {
@@ -36,22 +38,28 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.ViewModeChanged += AdjustViewMode;
             WaveManagerBusiness.WaveManager.AppSettingsChanged += RePaint;
             WaveManagerBusiness.WaveManager.CurrentWindowModified += RePaintCurrent;
+
             settings = WaveManagerBusiness.WaveManager.GetSettings();
+            this.BackColor = settings.canvasColor;
+            this.pen = new Pen(settings.lineColor, settings.lineWidth);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            this.BackColor = settings.canvasColor;
-            
+            RenderToGraphics(e.Graphics);
+        }
+
+        private void RenderToGraphics(Graphics canvas, bool print = false)
+        {
             // bail now if there is no wave file to draw
             if (Wave == null || !Wave.IsValid()) return;
 
             SetStyle(ControlStyles.ResizeRedraw, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true); 
-            SetStyle(ControlStyles.OptimizedDoubleBuffer,true); 
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.UserPaint, true);
 
-            Graphics g = e.Graphics;
+            Graphics g = canvas;
 
             // the maximum sample in the set
             int maxValue = Wave.Data.Max();
@@ -61,7 +69,8 @@ namespace WaveManagerUI
             {
                 case RenderStyle.Standard:
                     AutoScrollMinSize = new Size(Wave.NumberOfSamples, maxValue);
-                    g.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
+                    if (print == false)
+                        g.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
                     break;
                 case RenderStyle.Full:
                     AutoScrollMinSize = ClientRectangle.Size;
@@ -74,17 +83,38 @@ namespace WaveManagerUI
             // plot the wave file data
             if (WaveManagerBusiness.WaveManager.IsValid(Wave))
             {
-                Pen p = new Pen(settings.lineColor, settings.lineWidth);
                 for (int i = 0; i < Wave.NumberOfSamples - 1; i++)
                 {
-                    g.DrawLine(p, i, Wave.Data[i], i + 1, Wave.Data[i + 1]);
+                    canvas.DrawLine(pen, i, Wave.Data[i], i + 1, Wave.Data[i + 1]);
                 }
             }
             else
             {
                 Font myFont = new Font("Times New Roman", 16);
-                g.DrawString("Invalid file: "+ Wave.fileName, myFont, Brushes.Black, 10, 10);
+                g.DrawString("Invalid file: " + Wave.fileName, myFont, Brushes.Black, 10, 10);
             }
+        }
+
+        // TODO: figure out how to do this
+        public void SaveToDisk(string fileName)
+        {
+            Bitmap offScreenBmp = null;
+            switch (RenderStrategy)
+            {
+                case RenderStyle.Standard:
+                    offScreenBmp = new Bitmap(Wave.NumberOfSamples, Wave.Data.Max()); 
+                    break;
+                case RenderStyle.Full:
+                    offScreenBmp = new Bitmap(this.Width, this.Height); 
+                    break;
+            }
+            
+            Graphics offScreenGraphics = Graphics.FromImage(offScreenBmp); // do drawing in offScreenGC
+            offScreenGraphics.Clear(this.settings.canvasColor);
+            RenderToGraphics(offScreenGraphics, true);
+            //clientGC.DrawImage(offScreenBmp , 0, 0);
+            //// Save off Screen bitmap to a file 
+            offScreenBmp.Save(fileName, ImageFormat.Png);
         }
 
         private void AdjustViewMode()

@@ -42,6 +42,11 @@ namespace WaveManagerUI
             Initialize(file);
         }
 
+        public GraphView GetGraphView()
+        {
+            return _graphView;
+        }
+
         private void MdiForm_Load(object sender, EventArgs e)
         {
 

@@ -218,16 +218,26 @@ namespace WaveManagerUI
         private void OnSaveAsClick(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "WAV Files|*.wav";
+            dlg.Filter = "WAV Files|*.wav|PNG Images|*.png";
             dlg.Title = "Save Wave File";
 
             // If the file name is not an empty string open it for saving.
             var result = dlg.ShowDialog();
             if (result == DialogResult.OK)
             {
-                WaveFile newFile = WaveManagerBusiness.WaveManager.SaveAs(dlg.FileName);
-                // this updates the active reference for the selected window
-                ((MdiForm)ActiveMdiChild).ReInitialize(newFile);
+                var activeForm = ((MdiForm)ActiveMdiChild);
+                switch (Path.GetExtension(dlg.FileName).ToLower()) {
+                    case ".wav":
+                        WaveFile newFile = WaveManagerBusiness.WaveManager.SaveAs(dlg.FileName);
+                        // this updates the active reference for the selected window
+                        activeForm.ReInitialize(newFile);
+                        break;
+                    case ".png":
+                        activeForm.GetGraphView().SaveToDisk(dlg.FileName);
+                        break;
+                    default:
+                         break;
+	            }
             }
         }
 
