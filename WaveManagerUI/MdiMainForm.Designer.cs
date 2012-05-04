@@ -227,6 +227,7 @@
             this._menuPageSetup.Name = "_menuPageSetup";
             this._menuPageSetup.Size = new System.Drawing.Size(152, 22);
             this._menuPageSetup.Text = "Page Setup";
+            this._menuPageSetup.Click += new System.EventHandler(this.OnPageSetup);
             // 
             // _menuPrint
             // 

@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using WaveManagerDataAccess;
+using System.Drawing.Printing;
 
 namespace WaveManagerBusiness
 {
@@ -22,13 +23,13 @@ namespace WaveManagerBusiness
 
             _settings = new AppSettings();
             _settingsFile = Path.GetFullPath(".") + Path.DirectorySeparatorChar + "settings.config";
+            PageSettings = new PageSettings();
 
             if (File.Exists(_settingsFile))
             {
                 _settings = DeserializeSettings();
             }
         }
-
         static AppSettings _settings;
         static string _settingsFile;
         public static AppSettings GetSettings()
@@ -42,6 +43,8 @@ namespace WaveManagerBusiness
         }
 
         public static WaveFile ActiveFile;
+
+        public static PageSettings PageSettings;
 
         static List<WaveFile> openFiles = new List<WaveFile>();
         public static int GetOpenFilesCount()

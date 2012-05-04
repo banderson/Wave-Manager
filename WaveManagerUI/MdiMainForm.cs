@@ -241,5 +241,16 @@ namespace WaveManagerUI
                 child.Close();
             }
         }
+
+        private void OnPageSetup(object sender, EventArgs e)
+        {
+            PageSetupDialog dlg = new PageSetupDialog();
+            dlg.PageSettings = WaveManagerBusiness.WaveManager.PageSettings;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                WaveManagerBusiness.WaveManager.PageSettings = dlg.PageSettings;
+            }
+        }
     }
 }
