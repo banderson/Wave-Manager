@@ -34,7 +34,7 @@ namespace WaveManagerUI
 
             hideIfBlank = new List<ToolStripItem> 
                                 {   _btnCopy, _menuCopy, _btnCut, _menuCopy, _menuCut, _btnPaste, _menuPaste, _btnDelete, _menuDelete, _btnModule, _menuModulate, 
-                                    _btnRotate, _menuRotate, _btnPlay, _menuPlay, _btnPrint, _menuPrint, _btnSave, _menuSave, _btnViewMode, _menuFullNormal, _menuSaveAs };
+                                    _btnRotate, _menuRotate, _btnPlay, _menuPlay, _btnPrint, _menuPrintPreview, _menuPrint, _btnSave, _menuSave, _btnViewMode, _menuFullNormal, _menuSaveAs };
 
             hideIfUnModified = new List<ToolStripItem> { _btnSave, _menuSave };
 
@@ -244,7 +244,8 @@ namespace WaveManagerUI
 
         private void OnCloseClick(object sender, EventArgs e)
         {
-            ActiveMdiChild.Close();
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
         }
 
         private void OnCloseAllClick(object sender, EventArgs e)

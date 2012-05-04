@@ -53,7 +53,10 @@ namespace WaveManagerUI
         private void RenderToGraphics(Graphics canvas, bool print = false)
         {
             // bail now if there is no wave file to draw
-            if (Wave == null || !Wave.IsValid())
+            if (Wave == null)
+                return;
+            
+            if (!Wave.IsValid())
             {
                 MessageBox.Show("Invalid file! Please select a valid WAV file...");
                 this.ParentForm.Close();
