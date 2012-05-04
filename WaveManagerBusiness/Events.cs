@@ -17,6 +17,14 @@ namespace WaveManagerBusiness
         public delegate void AppSettingsChangedEventHandler();
         public delegate void ConfigSettingsChangedEventHandler();
         public delegate void CurrentWindowModifiedEventHandler();
+        public delegate void DirectoryModifiedEventHandler();
+
+        public delegate void FileSavedEventHandler();
+        public delegate void FileSaveAsEventHandler(WaveFile oldFile, WaveFile newFile);
+        public delegate void FileCutEventHandler();
+        public delegate void FileCopiedEventHandler();
+        public delegate void FilePastedEventHandler();
+        public delegate void FileDeletedEventHandler();
 
 
         /*** Events ***/
@@ -28,6 +36,13 @@ namespace WaveManagerBusiness
         public static event AppSettingsChangedEventHandler AppSettingsChanged;
         public static event ConfigSettingsChangedEventHandler ConfigSettingsChanged;
         public static event CurrentWindowModifiedEventHandler CurrentWindowModified;
+        public static event FileSavedEventHandler FileSaved;
+        public static event FileSaveAsEventHandler FileSaveAs;
+        public static event FileCutEventHandler FileCut;
+        public static event FileCopiedEventHandler FileCopied;
+        public static event FilePastedEventHandler FilePasted;
+        public static event FileDeletedEventHandler FileDeleted;
+        public static event DirectoryModifiedEventHandler DirectoryModified;
 
 
         /*** Invoke Event Callbacks ***/
@@ -78,6 +93,48 @@ namespace WaveManagerBusiness
         {
             if (CurrentWindowModified != null)
                 CurrentWindowModified.Invoke();
+        }
+
+        public static void FireFileSaved()
+        {
+            if (FileSaved != null)
+                FileSaved.Invoke();
+        }
+
+        public static void FireFileSaveAs(WaveFile oldFile, WaveFile newFile)
+        {
+            if (FileSaveAs != null)
+                FileSaveAs.Invoke(oldFile, newFile);
+        }
+
+        public static void FireFileCopied()
+        {
+            if (FileCopied != null)
+                FileCopied.Invoke();
+        }
+
+        public static void FireFileCut()
+        {
+            if (FileCut != null)
+                FileCut.Invoke();
+        }
+
+        public static void FireFilePasted()
+        {
+            if (FilePasted != null)
+                FilePasted.Invoke();
+        }
+
+        public static void FireFileDeleted()
+        {
+            if (FileDeleted != null)
+                FileDeleted.Invoke();
+        }
+
+        public static void FireDirectoryModified()
+        {
+            if (DirectoryModified != null)
+                DirectoryModified.Invoke();
         }
     }
 }

@@ -144,6 +144,13 @@ namespace WaveManagerBusiness
                 : ActiveFile;
         }
 
+        public static string GetActiveFilePath()
+        {
+            return (ActiveFile == null)
+                ? null
+                : ActiveFile.filePath;
+        }
+
         public static void ModulateWave()
         {
             WaveFile file = GetActiveFile();
@@ -160,6 +167,36 @@ namespace WaveManagerBusiness
             file.Flip();
 
             FireCurrentWindowModified();
+        }
+
+        public static void Save(WaveFile file)
+        {
+            file.Save();
+            FireFileSaved();
+        }
+
+        public static void Save()
+        {
+            WaveFile file = GetActiveFile();
+            Save(file);
+        }
+
+        public static WaveFile SaveAs(string fileName)
+        {
+            WaveFile file = GetActiveFile();
+            // remove the reference to the old file in the repo
+            RemoveOpenFile(file);
+            // save the new file
+            file.SaveAs(fileName);
+
+            // add a reference to the new file in the repo
+            var newFile = new WaveFile(fileName);
+            AddOpenFile(newFile);
+
+            FireFileSaveAs(file, newFile);
+            FireDirectoryModified();
+
+            return newFile;
         }
 
         private static void SerializeSettings()

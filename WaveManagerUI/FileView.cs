@@ -21,6 +21,8 @@ namespace WaveManagerUI
             InitializeComponent();
             this.AllowDrop = true;
             WaveManagerBusiness.WaveManager.RepaintFileList += InitPanel;
+            WaveManagerBusiness.WaveManager.DirectoryModified += InitPanel;
+
             _fileList.ImageList = _fileListIcons;
             _fileList.BackColor = _settings.bgColor;
             _fileList.Font = _settings.font;

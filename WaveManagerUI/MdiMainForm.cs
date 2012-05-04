@@ -32,10 +32,10 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.CurrentWindowModified += UpdateToolbarOptionsForCurrentWindow;
 
             hideIfBlank = new List<ToolStripItem> 
-                                {   _btnCopy, _btnCut, _btnPaste, _btnDelete, _btnModule, 
-                                    _btnRotate, _btnPlay, _btnPrint, _btnSave, _btnViewMode };
+                                {   _btnCopy, _menuCopy, _btnCut, _menuCopy, _menuCut, _btnPaste, _menuPaste, _btnDelete, _menuDelete, _btnModule, _menuModulate, 
+                                    _btnRotate, _menuRotate, _btnPlay, _menuPlay, _btnPrint, _menuPrint, _btnSave, _menuSave, _btnViewMode, _menuFullNormal, _menuSaveAs };
 
-            hideIfUnModified = new List<ToolStripItem> { _btnSave };
+            hideIfUnModified = new List<ToolStripItem> { _btnSave, _menuSave };
 
             UpdateToolbarOptionsForCurrentWindow();
         }
@@ -44,6 +44,7 @@ namespace WaveManagerUI
         {
             MdiForm graphForm = new MdiForm();
             graphForm.MdiParent = this;
+            graphForm.Wave = new WaveFile();
             graphForm.Show();
         }
 
@@ -70,6 +71,14 @@ namespace WaveManagerUI
 
         protected void OpenExistingFile(WaveFile file)
         {
+            // only open file if it's not already open
+            MdiForm match = (MdiForm)MdiChildren.FirstOrDefault(f => ((MdiForm)f).Wave == file);
+            if (match != null)
+            {
+                match.Activate();
+                return;
+            }
+
             MdiForm graphForm = new MdiForm(file);
             graphForm.MdiParent = this;
             graphForm.Show();
@@ -181,10 +190,56 @@ namespace WaveManagerUI
         private void OnPlay(object sender, EventArgs e)
         {
             if (WaveManagerBusiness.WaveManager.ActiveFile.IsModified())
-                MessageBox.Show("You must save the current file first.");
+                if (MessageBox.Show("Would you like to save first?", "Save", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    return;
+                else
+                    WaveManagerBusiness.WaveManager.Save();
 
             // this should play the actively selected file
             new SoundPlayer(WaveManagerBusiness.WaveManager.ActiveFile.filePath).Play();
+        }
+
+        private void OnSaveClick(object sender, EventArgs e)
+        {
+            string fileToSave = WaveManagerBusiness.WaveManager.GetActiveFilePath();
+            if (!String.IsNullOrEmpty(fileToSave))
+            {
+                WaveManagerBusiness.WaveManager.Save();
+            }
+            else
+            {
+                OnSaveAsClick(sender, e);
+            }
+
+        }
+
+        private void OnSaveAsClick(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "WAV Files|*.wav";
+            dlg.Title = "Save Wave File";
+
+            // If the file name is not an empty string open it for saving.
+            var result = dlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                WaveFile newFile = WaveManagerBusiness.WaveManager.SaveAs(dlg.FileName);
+                // this updates the active reference for the selected window
+                ((MdiForm)ActiveMdiChild).ReInitialize(newFile);
+            }
+        }
+
+        private void OnCloseClick(object sender, EventArgs e)
+        {
+            ActiveMdiChild.Close();
+        }
+
+        private void OnCloseAllClick(object sender, EventArgs e)
+        {
+            foreach (var child in MdiChildren)
+            {
+                child.Close();
+            }
         }
     }
 }

@@ -33,7 +33,7 @@
             // 
             // _graphView
             // 
-            this._graphView.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this._graphView.BackColor = System.Drawing.Color.CornflowerBlue;
             this._graphView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._graphView.Location = new System.Drawing.Point(0, 0);
             this._graphView.Name = "_graphView";
@@ -49,6 +49,7 @@
             this.Controls.Add(this._graphView);
             this.Name = "MdiForm";
             this.Text = "Graph";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClosed);
             this.Load += new System.EventHandler(this.MdiForm_Load);
             this.Enter += new System.EventHandler(this.OnFocus);

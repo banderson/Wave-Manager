@@ -57,6 +57,27 @@ namespace WaveDataContracts
             }
         }
 
+        public void Save()
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            using (BinaryWriter br = new BinaryWriter(fs))
+            {
+                br.Write(this.Header, 0, WaveFile.HEADER_SIZE);
+                br.Write(this.NumberOfSamples);
+                br.Write(this.Data);
+            }
+
+            this._isModified = false;
+        }
+
+        public void SaveAs(string fileName)
+        {
+            // assign the new file name
+            this.fileName = this.filePath = fileName;
+
+            Save();
+        }
+
         public void Modulate()
         {
             if (!IsValid())

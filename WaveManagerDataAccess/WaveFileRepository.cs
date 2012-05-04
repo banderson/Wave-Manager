@@ -22,7 +22,8 @@ namespace WaveManagerDataAccess
 
         public static void RemoveFile(string fileName)
         {
-            _data.Remove(fileName);
+            if (!string.IsNullOrEmpty(fileName))
+                _data.Remove(fileName);
         }
 
         public static bool Contains(string fileName)
