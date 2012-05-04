@@ -58,6 +58,10 @@
       <Project>{FB5CF394-DCD2-4691-BD8B-2070938377F8}</Project>
       <Name>WaveManagerDataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WaveManagerUtil\WaveManagerUtil.csproj">
+      <Project>{63592ACE-545C-4C36-9305-6CA7A595CE3A}</Project>
+      <Name>WaveManagerUtil</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

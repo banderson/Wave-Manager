@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WaveDataContracts;
+using System.IO;
 
 namespace WaveManagerBusiness
 {
@@ -135,6 +136,16 @@ namespace WaveManagerBusiness
         {
             if (DirectoryModified != null)
                 DirectoryModified.Invoke();
+        }
+
+        public static void OnDirectoryChanged(object source, FileSystemEventArgs e)
+        {
+            if (e.ChangeType == WatcherChangeTypes.Deleted)
+            {
+                string directory = Path.GetDirectoryName(e.FullPath);
+                if (FindFile)
+            }
+            FireRepaintFileList();
         }
     }
 }

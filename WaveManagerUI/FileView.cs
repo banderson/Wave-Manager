@@ -14,7 +14,7 @@ namespace WaveManagerUI
 {
     public partial class FileView : UserControl
     {
-        AppSettings _settings = WaveManagerBusiness.WaveManager.GetSettings();
+        static AppSettings _settings = WaveManagerBusiness.WaveManager.GetSettings();
 
         public FileView()
         {
@@ -31,10 +31,10 @@ namespace WaveManagerUI
 
         private void InitPanel()
         {
-            _fileList.BackColor = _settings.bgColor;
-            _fileList.Font = _settings.font;
-            _fileList.ForeColor = _settings.textColor;
-            RedrawFiles();
+            if (InvokeRequired)
+                Invoke((Action)(() => RedrawFiles()));
+            else
+                RedrawFiles();
         }
 
         private void OnDragDrop(object sender, DragEventArgs e)
@@ -44,6 +44,11 @@ namespace WaveManagerUI
 
         private void RedrawFiles()
         {
+
+            _fileList.BackColor = _settings.bgColor;
+            _fileList.Font = _settings.font;
+            _fileList.ForeColor = _settings.textColor;
+
             _fileList.Nodes.Clear();
 
             foreach (string dir in WaveManagerBusiness.WaveManager.GetDirectories())

@@ -8,6 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using WaveManagerDataAccess;
 using System.Drawing.Printing;
+using WaveManagerUtil;
+using System.ComponentModel;
 
 namespace WaveManagerBusiness
 {
@@ -66,16 +68,17 @@ namespace WaveManagerBusiness
         }
 
 
-        static List<string> directories = new List<string>();
+        //static List<string> directories = new List<string>();
+        static List<FileSystemWatcher> directories = new List<FileSystemWatcher>();
         public static List<string> GetDirectories()
         {
-            return directories;
+            return directories.Select<FileSystemWatcher, String>(fsw => fsw.Path).ToList();
         }
         public static void AddDirectory(string directory)
         {
-            if (!directories.Contains(directory))
+            if (directories.Where(fsw => fsw.Path.Equals(directory)).Count() == 0)
             {
-                directories.Add(directory);
+                directories.Add(FileWatcherHelper.GetWatcher(directory, OnDirectoryChanged));
             }
         }
 
@@ -197,7 +200,6 @@ namespace WaveManagerBusiness
             AddOpenFile(newFile);
 
             FireFileSaveAs(file, newFile);
-            FireDirectoryModified();
 
             return newFile;
         }

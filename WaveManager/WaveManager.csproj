@@ -89,6 +89,10 @@
       <Project>{96FD20E5-9924-4236-8BB3-9DF5E1E76C5F}</Project>
       <Name>WaveManagerUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WaveManagerUtil\WaveManagerUtil.csproj">
+      <Project>{63592ACE-545C-4C36-9305-6CA7A595CE3A}</Project>
+      <Name>WaveManagerUtil</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="wave-mgr-logo.png" />
