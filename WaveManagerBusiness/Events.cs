@@ -26,7 +26,7 @@ namespace WaveManagerBusiness
         public delegate void FileCopiedEventHandler();
         public delegate void FilePastedEventHandler();
         public delegate void FileDeletedEventHandler();
-
+        public delegate void InvalidFileOpenedEventHandler(WaveFile file);
 
         /*** Events ***/
         public static event FileOpenedEventHandler FileOpened;
@@ -44,6 +44,7 @@ namespace WaveManagerBusiness
         public static event FilePastedEventHandler FilePasted;
         public static event FileDeletedEventHandler FileDeleted;
         public static event DirectoryModifiedEventHandler DirectoryModified;
+        public static event InvalidFileOpenedEventHandler InvalidFileOpened;
 
 
         /*** Invoke Event Callbacks ***/
@@ -141,6 +142,12 @@ namespace WaveManagerBusiness
         public static void OnDirectoryChanged(object source, FileSystemEventArgs e)
         {
             FireRepaintFileList();
+        }
+
+        public static void FireInvalidFileOpened(WaveFile file)
+        {
+            if (InvalidFileOpened != null)
+                InvalidFileOpened.Invoke(file);
         }
     }
 }

@@ -52,7 +52,13 @@ namespace WaveManagerUI
         private void RenderToGraphics(Graphics canvas, bool print = false)
         {
             // bail now if there is no wave file to draw
-            if (Wave == null || !Wave.IsValid()) return;
+            if (Wave == null || !Wave.IsValid())
+            {
+                MessageBox.Show("Invalid file! Please select a valid WAV file...");
+                this.ParentForm.Close();
+                WaveManagerBusiness.WaveManager.FireInvalidFileOpened(Wave);
+                return;
+            }
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -62,7 +68,7 @@ namespace WaveManagerUI
             Graphics g = canvas;
 
             // the maximum sample in the set
-            int maxValue = Wave.Data.Max();
+            int maxValue = Wave.MaxDataPoint();
 
             // setup the scrolling mechanism
             switch (RenderStrategy)

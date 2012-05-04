@@ -106,7 +106,8 @@ namespace WaveManagerBusiness
         // this indicates whether the file has changed since last save
         public static void MarkAsModified()
         {
-            ActiveFile.MarkAsModified();
+            if (ActiveFile != null)
+                ActiveFile.MarkAsModified();
         }
 
         public static WaveFile FindFile(string fileName)
@@ -200,6 +201,7 @@ namespace WaveManagerBusiness
             AddOpenFile(newFile);
 
             FireFileSaveAs(file, newFile);
+            FireWindowSelected(newFile);
 
             return newFile;
         }

@@ -23,6 +23,7 @@ namespace WaveDataContracts
         public WaveFile()
         {
             NumberOfSamples = 0;
+            _maxDataPoint = 0;
             Header = new byte[HEADER_SIZE];
         }
 
@@ -54,6 +55,10 @@ namespace WaveDataContracts
                     this.Data = new byte[0];
                 }
                 br.Read(this.Data, 0, this.NumberOfSamples);
+
+                // save the maximum data point
+                if (Data.Length > 0)
+                    _maxDataPoint = Data.Max();
             }
         }
 
@@ -102,6 +107,21 @@ namespace WaveDataContracts
 
         public Boolean IsValid()
         {
+            // first make sure the file can be loaded into memory
+            //byte[] testArray;
+            //try
+            //{
+            //    testArray = new byte[NumberOfSamples];
+            //}
+            //catch (OverflowException)
+            //{
+            //    return false;
+            //}
+            //finally
+            //{
+            //    testArray = null;
+            //}
+            
             // first 4-bytes from header (there are probably many other better ways to do this...)
             var test = "";
             for (int i = 0; i < 4; i++)
@@ -126,6 +146,15 @@ namespace WaveDataContracts
         public void MarkAsModified()
         {
             _isModified = true;
+        }
+
+        int _maxDataPoint;
+        public int MaxDataPoint()
+        {
+            if (Data.Length == 0)
+                return 0;
+
+            return _maxDataPoint;
         }
     }
 }
