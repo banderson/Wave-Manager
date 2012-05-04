@@ -83,6 +83,8 @@ namespace WaveManagerUI
             graphForm.MdiParent = this;
             graphForm.Show();
 
+            //_menuWindow.
+
             // start tracking the current directory
             var directory = Path.GetDirectoryName(file.filePath);
             WaveManagerBusiness.WaveManager.AddDirectory(directory);
@@ -251,6 +253,14 @@ namespace WaveManagerUI
             {
                 WaveManagerBusiness.WaveManager.PageSettings = dlg.PageSettings;
             }
+        }
+
+        private void OnWindowArrangement(object sender, EventArgs e)
+        {
+            // fancy parsing of the menu command title into the MdiLayout enum
+            string menuTxt = sender.ToString().Replace(" ", "");
+            MdiLayout layout = (MdiLayout)Enum.Parse(typeof(MdiLayout), menuTxt);
+            this.LayoutMdi(layout);
         }
     }
 }

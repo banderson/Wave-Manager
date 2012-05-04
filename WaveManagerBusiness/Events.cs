@@ -140,11 +140,6 @@ namespace WaveManagerBusiness
 
         public static void OnDirectoryChanged(object source, FileSystemEventArgs e)
         {
-            if (e.ChangeType == WatcherChangeTypes.Deleted)
-            {
-                string directory = Path.GetDirectoryName(e.FullPath);
-                if (FindFile)
-            }
             FireRepaintFileList();
         }
     }
