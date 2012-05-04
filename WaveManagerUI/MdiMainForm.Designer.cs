@@ -79,6 +79,7 @@
             this._menuTileHorizontally = new System.Windows.Forms.ToolStripMenuItem();
             this._menuTileVertically = new System.Windows.Forms.ToolStripMenuItem();
             this._menuCascade = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._menuIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -111,7 +112,8 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this._printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this._printDocument = new System.Drawing.Printing.PrintDocument();
             this.fileView1 = new WaveManagerUI.FileView();
             this._statusBar = new WaveManagerUI.StatusBar();
             this._fileView = new WaveManagerUI.FileView();
@@ -239,6 +241,7 @@
             this._menuPrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this._menuPrint.Size = new System.Drawing.Size(146, 22);
             this._menuPrint.Text = "&Print";
+            this._menuPrint.Click += new System.EventHandler(this.OnPrintClick);
             // 
             // _menuPrintPreview
             // 
@@ -247,6 +250,7 @@
             this._menuPrintPreview.Name = "_menuPrintPreview";
             this._menuPrintPreview.Size = new System.Drawing.Size(146, 22);
             this._menuPrintPreview.Text = "Print Pre&view";
+            this._menuPrintPreview.Click += new System.EventHandler(this.OnPrintPreview);
             // 
             // toolStripSeparator2
             // 
@@ -500,23 +504,28 @@
             // _menuTileHorizontally
             // 
             this._menuTileHorizontally.Name = "_menuTileHorizontally";
-            this._menuTileHorizontally.Size = new System.Drawing.Size(152, 22);
+            this._menuTileHorizontally.Size = new System.Drawing.Size(151, 22);
             this._menuTileHorizontally.Text = "Tile Horizontal";
             this._menuTileHorizontally.Click += new System.EventHandler(this.OnWindowArrangement);
             // 
             // _menuTileVertically
             // 
             this._menuTileVertically.Name = "_menuTileVertically";
-            this._menuTileVertically.Size = new System.Drawing.Size(152, 22);
+            this._menuTileVertically.Size = new System.Drawing.Size(151, 22);
             this._menuTileVertically.Text = "Tile Vertical";
             this._menuTileVertically.Click += new System.EventHandler(this.OnWindowArrangement);
             // 
             // _menuCascade
             // 
             this._menuCascade.Name = "_menuCascade";
-            this._menuCascade.Size = new System.Drawing.Size(152, 22);
+            this._menuCascade.Size = new System.Drawing.Size(151, 22);
             this._menuCascade.Text = "Cascade";
             this._menuCascade.Click += new System.EventHandler(this.OnWindowArrangement);
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(148, 6);
             // 
             // helpToolStripMenuItem
             // 
@@ -805,10 +814,20 @@
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
-            // toolStripMenuItem10
+            // _printPreviewDialog
             // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(149, 6);
+            this._printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this._printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this._printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this._printPreviewDialog.Document = this._printDocument;
+            this._printPreviewDialog.Enabled = true;
+            this._printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("_printPreviewDialog.Icon")));
+            this._printPreviewDialog.Name = "_printPreviewDialog";
+            this._printPreviewDialog.Visible = false;
+            // 
+            // _printDocument
+            // 
+            this._printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.OnPrintPage);
             // 
             // fileView1
             // 
@@ -960,5 +979,7 @@
         private FileView fileView1;
         private StatusBar _statusBar;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+        private System.Windows.Forms.PrintPreviewDialog _printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument _printDocument;
     }
 }

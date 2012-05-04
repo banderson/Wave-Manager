@@ -10,6 +10,7 @@ using WaveDataContracts;
 using System.IO;
 using WaveManagerBusiness;
 using System.Media;
+using System.Drawing.Printing;
 
 namespace WaveManagerUI
 {
@@ -271,6 +272,39 @@ namespace WaveManagerUI
             string menuTxt = sender.ToString().Replace(" ", "");
             MdiLayout layout = (MdiLayout)Enum.Parse(typeof(MdiLayout), menuTxt);
             this.LayoutMdi(layout);
+        }
+
+
+        private void OnPrintClick(object sender, EventArgs e)
+        {
+            PrintDialog dlg = new PrintDialog();
+            // pass the saved page settings object
+            _printDocument.DefaultPageSettings = WaveManagerBusiness.WaveManager.PageSettings;
+            dlg.Document = _printDocument;
+            
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+
+            _printDocument.Print();
+        }
+
+        private void OnPrintPage(object sender, PrintPageEventArgs e)
+        {
+            var activeForm = ((MdiForm)ActiveMdiChild);
+            if (activeForm.GetGraphView().RenderStrategy == GraphView.RenderStyle.Full)
+                activeForm.GetGraphView().PrintFull(e);
+            else
+                activeForm.GetGraphView().PrintStandard(e);
+        }
+
+        private void OnPrintPreview(object sender, EventArgs e)
+        {
+            // pass the saved page settings object
+            _printPreviewDialog.Document.DefaultPageSettings = WaveManagerBusiness.WaveManager.PageSettings;
+
+            var f = (Form)_printPreviewDialog;
+            f.WindowState = FormWindowState.Maximized;
+            f.ShowDialog();
         }
     }
 }

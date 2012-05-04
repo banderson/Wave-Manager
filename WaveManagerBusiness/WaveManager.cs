@@ -10,6 +10,7 @@ using WaveManagerDataAccess;
 using System.Drawing.Printing;
 using WaveManagerUtil;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace WaveManagerBusiness
 {
@@ -225,6 +226,75 @@ namespace WaveManagerBusiness
             }
 
             return _settings;
+        }
+
+        public static void PrintPage(PrintPageEventArgs e)
+        {
+            int row = 1; // start on first row
+
+            //// adjust for margins
+            //Point origin = e.MarginBounds.Location;
+            //e.Graphics.TranslateTransform(origin.X, origin.Y);
+
+            //// print header row
+            //PrintHeaderCell(e, 1, row, "Group");
+            //PrintHeaderCell(e, 2, row, "Title");
+            //PrintHeaderCell(e, 3, row, "User Name");
+            //PrintHeaderCell(e, 4, row, "Password");
+            //PrintHeaderCell(e, 5, row, "URL");
+            //PrintHeaderCell(e, 6, row, "Notes");
+            //row++;
+
+            //// print seection for each group and its related keys
+            //foreach (var group in KeyPassMgr.GetGroups())
+            //{
+            //    row++;
+            //    PrintHeaderCell(e, 1, row, group.GroupName);
+
+            //    for (int i = 0; i < group.Keys.Count; i++)
+            //    {
+            //        PrintDataCell(e, 2, row, group.Keys[i].Title);
+            //        PrintDataCell(e, 3, row, group.Keys[i].UserName);
+            //        PrintDataCell(e, 4, row, group.Keys[i].Password);
+            //        PrintDataCell(e, 5, row, group.Keys[i].Url);
+            //        PrintDataCell(e, 6, row, group.Keys[i].Notes);
+            //        row++;
+            //    }
+            //}
+        }
+
+        private static void PrintCell(PrintPageEventArgs e, int column, int row, string text, Brush brush)
+        {
+            // dynamically determine the width of each column
+            int cellHeight = 25;
+            int cellWidth = 100;// (e.PageBounds.Width - e.PageSettings.Margins.Left - e.PageSettings.Margins.Top) / 6;
+
+            // calculate the cell x/y location based on page dimensions
+            int x = cellWidth * (column - 1), y = cellHeight * (row - 1);
+
+            // draw cell
+            var rect = new Rectangle(x, y, cellWidth, cellHeight);
+            var g = e.Graphics;
+            g.FillRectangle(brush, rect);
+            g.DrawRectangle(Pens.Black, rect);
+
+            // format text and add to cell
+            Font messageFont = new Font("Segoe UI", 9, GraphicsUnit.Point);
+            StringFormat mine = new StringFormat(StringFormat.GenericTypographic);
+            mine.Trimming = StringTrimming.EllipsisCharacter;
+            mine.Alignment = StringAlignment.Near;
+            mine.LineAlignment = StringAlignment.Center;
+            g.DrawString(" " + text, messageFont, Brushes.Black, rect, mine);
+        }
+
+        private static void PrintHeaderCell(PrintPageEventArgs e, int column, int row, string text)
+        {
+            PrintCell(e, column, row, text, Brushes.LightGray);
+        }
+
+        private static void PrintDataCell(PrintPageEventArgs e, int column, int row, string text)
+        {
+            PrintCell(e, column, row, text, Brushes.White);
         }
     }
 }
