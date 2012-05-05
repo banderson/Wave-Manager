@@ -93,7 +93,7 @@ namespace WaveManagerUI
 
         private void OnDblClick(object sender, EventArgs e)
         {
-            if (_fileList.SelectedNode.Tag != null)
+            if (_fileList.SelectedNode != null && _fileList.SelectedNode.Tag != null)
             {
                 WaveManagerBusiness.WaveManager.OpenFile(_fileList.SelectedNode.Tag.ToString());
             }

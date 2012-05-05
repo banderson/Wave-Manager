@@ -181,6 +181,14 @@ namespace WaveManagerUI
             }
         }
 
+        private void OnCutClick(object sender, EventArgs e)
+        {
+            // first, copy the file
+            OnCopyClick(sender, e);
+            // now clear the file contents
+            OnDeleteClick(sender, e);
+        }
+
         private void OnPasteClick(object sender, EventArgs e)
         {
             var copiedFile = GetClipBoardData();
