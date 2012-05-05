@@ -22,6 +22,9 @@ namespace WaveManagerUI
         AppSettings settings;
         Pen pen;
 
+        // this holds the 'undo' data, i.e. the prev window state
+        private WaveFile _prevData;
+
         public enum RenderStyle
         {
             Standard,
@@ -222,6 +225,35 @@ namespace WaveManagerUI
         private void RePaint()
         {
             Invalidate();
+        }
+
+        public void SaveCurrentState()
+        {
+            // this clones the current data and preserves it
+            _prevData = ((WaveFile)Wave.Clone());
+        }
+
+        public void UndoChanges()
+        {
+            // copy all the data attributes from the old object over the new one
+            Wave.fileName = _prevData.fileName;
+            Wave.filePath = _prevData.filePath;
+            Wave.NumberOfSamples = _prevData.NumberOfSamples;
+            // we should be able to just copy over these references instead of each entry...
+            Wave.Header = _prevData.Header;
+            Wave.Data = _prevData.Data;
+
+            // since we're just doing one-level on undo, kill the old object
+            _prevData = null;
+
+            // change notification so the window will reload
+            WaveManagerBusiness.WaveManager.FireCurrentWindowModified();
+        }
+
+        public Boolean CanUndo()
+        {
+            // if there's an old object to restore, we can undo
+            return _prevData != null;
         }
     }
 }

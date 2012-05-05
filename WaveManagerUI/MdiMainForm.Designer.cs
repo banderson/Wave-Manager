@@ -282,20 +282,21 @@
             // 
             this._menuUndo.Name = "_menuUndo";
             this._menuUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this._menuUndo.Size = new System.Drawing.Size(144, 22);
+            this._menuUndo.Size = new System.Drawing.Size(152, 22);
             this._menuUndo.Text = "&Undo";
+            this._menuUndo.Click += new System.EventHandler(this.OnUndoClick);
             // 
             // _menuRedo
             // 
             this._menuRedo.Name = "_menuRedo";
             this._menuRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this._menuRedo.Size = new System.Drawing.Size(144, 22);
+            this._menuRedo.Size = new System.Drawing.Size(152, 22);
             this._menuRedo.Text = "&Redo";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // _menuCut
             // 
@@ -303,7 +304,7 @@
             this._menuCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuCut.Name = "_menuCut";
             this._menuCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this._menuCut.Size = new System.Drawing.Size(144, 22);
+            this._menuCut.Size = new System.Drawing.Size(152, 22);
             this._menuCut.Text = "Cu&t";
             // 
             // _menuCopy
@@ -312,13 +313,13 @@
             this._menuCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuCopy.Name = "_menuCopy";
             this._menuCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this._menuCopy.Size = new System.Drawing.Size(144, 22);
+            this._menuCopy.Size = new System.Drawing.Size(152, 22);
             this._menuCopy.Text = "&Copy";
             // 
             // _menuCopyBitmap
             // 
             this._menuCopyBitmap.Name = "_menuCopyBitmap";
-            this._menuCopyBitmap.Size = new System.Drawing.Size(144, 22);
+            this._menuCopyBitmap.Size = new System.Drawing.Size(152, 22);
             this._menuCopyBitmap.Text = "Copy Bitmap";
             // 
             // _menuPaste
@@ -327,13 +328,13 @@
             this._menuPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuPaste.Name = "_menuPaste";
             this._menuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this._menuPaste.Size = new System.Drawing.Size(144, 22);
+            this._menuPaste.Size = new System.Drawing.Size(152, 22);
             this._menuPaste.Text = "&Paste";
             // 
             // _menuDelete
             // 
             this._menuDelete.Name = "_menuDelete";
-            this._menuDelete.Size = new System.Drawing.Size(144, 22);
+            this._menuDelete.Size = new System.Drawing.Size(152, 22);
             this._menuDelete.Text = "Delete";
             // 
             // toolsToolStripMenuItem
@@ -624,6 +625,7 @@
             this._btnPrint.Size = new System.Drawing.Size(36, 51);
             this._btnPrint.Text = "&Print";
             this._btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._btnPrint.Click += new System.EventHandler(this.OnPrintClick);
             // 
             // toolStripSeparator6
             // 

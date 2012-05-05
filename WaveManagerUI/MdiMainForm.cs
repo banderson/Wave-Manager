@@ -171,12 +171,39 @@ namespace WaveManagerUI
 
         private void OnModulate(object sender, EventArgs e)
         {
+            PreserveActiveWindowState();
             WaveManagerBusiness.WaveManager.ModulateWave();
         }
 
         private void OnRotateClick(object sender, EventArgs e)
         {
+            PreserveActiveWindowState();
             WaveManagerBusiness.WaveManager.RotateWave();
+        }
+
+        // this stores the undo data before modifications are made
+        private void PreserveActiveWindowState()
+        {
+            if (ActiveMdiChild != null)
+                ((MdiForm)ActiveMdiChild).GetGraphView().SaveCurrentState();
+        }
+
+        // this stores the undo data before modifications are made
+        private MdiForm GetCurrentWindow()
+        {
+            if (ActiveMdiChild != null)
+                return ((MdiForm)ActiveMdiChild);
+
+            return null;
+        }
+
+        // this stores the undo data before modifications are made
+        private GraphView GetCurrentWaveGraph()
+        {
+            if (ActiveMdiChild != null)
+                return ((MdiForm)ActiveMdiChild).GetGraphView();
+
+            return null;
         }
 
         private void UpdateToolbarOptionsForCurrentWindow(WaveFile file)
@@ -188,6 +215,9 @@ namespace WaveManagerUI
         {
             hideIfBlank.ForEach(b => b.Enabled = !WaveManagerBusiness.WaveManager.IsCurrentDocumentBlank());
             hideIfUnModified.ForEach(b => b.Enabled = WaveManagerBusiness.WaveManager.IsCurrentDocumentModified());
+
+            // hide undo if nothing available
+            _menuUndo.Enabled = GetCurrentWaveGraph() != null && GetCurrentWaveGraph().CanUndo();
         }
 
         private void OnPlay(object sender, EventArgs e)
@@ -306,6 +336,12 @@ namespace WaveManagerUI
             var f = (Form)_printPreviewDialog;
             f.WindowState = FormWindowState.Maximized;
             f.ShowDialog();
+        }
+
+        private void OnUndoClick(object sender, EventArgs e)
+        {
+            if (GetCurrentWaveGraph() != null)
+                GetCurrentWaveGraph().UndoChanges();
         }
     }
 }

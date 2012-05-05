@@ -6,7 +6,7 @@ using System.IO;
 
 namespace WaveDataContracts
 {
-    public class WaveFile
+    public class WaveFile : ICloneable
     {
         public const int HEADER_SIZE = 40;
         public const string HEADER_PREFIX = "RIFF";
@@ -106,23 +106,7 @@ namespace WaveDataContracts
         }
 
         public Boolean IsValid()
-        {
-            // first make sure the file can be loaded into memory
-            //byte[] testArray;
-            //try
-            //{
-            //    testArray = new byte[NumberOfSamples];
-            //}
-            //catch (OverflowException)
-            //{
-            //    return false;
-            //}
-            //finally
-            //{
-            //    testArray = null;
-            //}
-            
-            // first 4-bytes from header (there are probably many other better ways to do this...)
+        {            // first 4-bytes from header (there are probably many other better ways to do this...)
             var test = "";
             for (int i = 0; i < 4; i++)
             {
@@ -155,6 +139,30 @@ namespace WaveDataContracts
                 return 0;
 
             return _maxDataPoint;
+        }
+
+        public object Clone()
+        {
+            var copy = new WaveFile();
+            copy.fileName = fileName;
+            copy.filePath = filePath;
+            copy.NumberOfSamples = NumberOfSamples;
+            copy.Header = new byte[WaveFile.HEADER_SIZE];
+            copy.Data = new byte[NumberOfSamples];
+
+            // copy the header data
+            for (int i = 0; i < WaveFile.HEADER_SIZE; i++)
+            {
+                copy.Header[i] = this.Header[i];
+            }
+
+            // copy the wave data
+            for (int i = 0; i < NumberOfSamples; i++)
+            {
+                copy.Data[i] = this.Data[i];
+            }
+
+            return copy;
         }
     }
 }
