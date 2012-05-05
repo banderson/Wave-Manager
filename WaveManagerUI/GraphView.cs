@@ -35,6 +35,7 @@ namespace WaveManagerUI
         {
             InitializeComponent();
             RenderStrategy = RenderStyle.Standard;
+            Wave = new WaveFile();
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -230,7 +231,8 @@ namespace WaveManagerUI
         public void SaveCurrentState()
         {
             // this clones the current data and preserves it
-            _prevData = ((WaveFile)Wave.Clone());
+            if (Wave != null)
+                _prevData = ((WaveFile)Wave.Clone());
         }
 
         public void UndoChanges()

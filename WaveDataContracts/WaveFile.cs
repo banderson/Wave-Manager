@@ -6,6 +6,7 @@ using System.IO;
 
 namespace WaveDataContracts
 {
+    [Serializable]
     public class WaveFile : ICloneable
     {
         public const int HEADER_SIZE = 40;
@@ -73,6 +74,11 @@ namespace WaveDataContracts
             }
 
             this._isModified = false;
+        }
+
+        public bool IsNewFile()
+        {
+            return string.IsNullOrEmpty(filePath);
         }
 
         public void SaveAs(string fileName)
@@ -169,6 +175,26 @@ namespace WaveDataContracts
             }
 
             return copy;
+        }
+
+        // TODO: does this really belong here
+        public void AcceptNewDataFrom(WaveFile copyFrom)
+        {
+            NumberOfSamples = copyFrom.NumberOfSamples;
+            Header = new byte[WaveFile.HEADER_SIZE];
+            Data = new byte[NumberOfSamples];
+
+            // copy the header data
+            for (int i = 0; i < WaveFile.HEADER_SIZE; i++)
+            {
+                Header[i] = copyFrom.Header[i];
+            }
+
+            // copy the wave data
+            for (int i = 0; i < NumberOfSamples; i++)
+            {
+                Data[i] = copyFrom.Data[i];
+            }
         }
     }
 }

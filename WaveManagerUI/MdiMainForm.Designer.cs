@@ -262,6 +262,7 @@
             this._menuExit.Name = "_menuExit";
             this._menuExit.Size = new System.Drawing.Size(146, 22);
             this._menuExit.Text = "E&xit";
+            this._menuExit.Click += new System.EventHandler(this.OnExitClick);
             // 
             // editToolStripMenuItem
             // 
@@ -394,13 +395,13 @@
             this.thicknessToolStripMenuItem,
             this._menuBGColor});
             this.waveToolStripMenuItem.Name = "waveToolStripMenuItem";
-            this.waveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.waveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.waveToolStripMenuItem.Text = "Wave...";
             // 
             // _menuCanvasColor
             // 
             this._menuCanvasColor.Name = "_menuCanvasColor";
-            this._menuCanvasColor.Size = new System.Drawing.Size(152, 22);
+            this._menuCanvasColor.Size = new System.Drawing.Size(138, 22);
             this._menuCanvasColor.Text = "Color...";
             this._menuCanvasColor.Click += new System.EventHandler(this.OnLineColorClick);
             // 
@@ -412,7 +413,7 @@
             this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.thicknessToolStripMenuItem.Name = "thicknessToolStripMenuItem";
-            this.thicknessToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.thicknessToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.thicknessToolStripMenuItem.Text = "Thickness";
             // 
             // toolStripMenuItem4
@@ -446,7 +447,7 @@
             // _menuBGColor
             // 
             this._menuBGColor.Name = "_menuBGColor";
-            this._menuBGColor.Size = new System.Drawing.Size(152, 22);
+            this._menuBGColor.Size = new System.Drawing.Size(138, 22);
             this._menuBGColor.Text = "Background";
             this._menuBGColor.Click += new System.EventHandler(this.OnBackgroundColorClick);
             // 
@@ -656,6 +657,7 @@
             this._btnCopy.Size = new System.Drawing.Size(39, 51);
             this._btnCopy.Text = "Copy";
             this._btnCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._btnCopy.Click += new System.EventHandler(this.OnCopyClick);
             // 
             // _btnPaste
             // 
@@ -665,6 +667,7 @@
             this._btnPaste.Size = new System.Drawing.Size(39, 51);
             this._btnPaste.Text = "&Paste";
             this._btnPaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._btnPaste.Click += new System.EventHandler(this.OnPasteClick);
             // 
             // _btnDelete
             // 

@@ -27,7 +27,7 @@ namespace WaveManagerUI
         {
             this.Wave = file;
             this._graphView.Wave = file;
-            if (Wave != null)
+            if (Wave != null && !String.IsNullOrEmpty(Wave.fileName))
             {
                 this.Text = Wave.fileName;
             }
@@ -66,9 +66,14 @@ namespace WaveManagerUI
         {
             if (Wave.IsModified())
             {
+                string fileToSave = WaveManagerBusiness.WaveManager.GetActiveFilePath();
                 DialogResult r = MessageBox.Show("Save changes to "+ Wave.fileName +"?", "Save", MessageBoxButtons.YesNoCancel);
                 if (r == DialogResult.Yes)
-                    WaveManagerBusiness.WaveManager.Save(Wave);
+                    if (!String.IsNullOrEmpty(fileToSave))
+                        WaveManagerBusiness.WaveManager.Save(Wave);
+                    else
+                        ((MdiMainForm)MdiParent).SaveAs();
+
                 else if (r == DialogResult.Cancel)
                     e.Cancel = true; // leave the file open
             }

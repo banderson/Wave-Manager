@@ -169,6 +169,48 @@ namespace WaveManagerUI
                 WaveManagerBusiness.WaveManager.UpdateSettings(s => s.lineWidth = width);
         }
 
+        private void OnCopyClick(object sender, EventArgs e)
+        {
+            // Get the dataObject associated with the clipboard
+            DataObject dataObj = new DataObject();
+            if (GetCurrentWaveGraph() != null)
+            {
+                dataObj.SetData("WaveFile", GetCurrentWaveGraph().Wave);
+                Clipboard.SetDataObject(dataObj, true);
+                _menuPaste.Enabled = _btnPaste.Enabled = true;
+            }
+        }
+
+        private void OnPasteClick(object sender, EventArgs e)
+        {
+            var copiedFile = GetClipBoardData();
+            if (copiedFile != null)
+            {
+                // update the existing document with copied object's data
+                PreserveActiveWindowState();
+                WaveManagerBusiness.WaveManager.PasteFileData(copiedFile);
+                GetCurrentWindow().ReInitialize(GetCurrentWindow().Wave);
+                WaveManagerBusiness.WaveManager.FireCurrentWindowModified();
+            }
+        }
+
+        private WaveFile GetClipBoardData()
+        {
+            // Get the dataObject associated with the clipboard
+            IDataObject dataObj = Clipboard.GetDataObject();
+            WaveFile copied = null;
+            // First check if the clipboard contains our custom data
+            if (dataObj.GetDataPresent("WaveFile"))
+                copied = dataObj.GetData("WaveFile") as WaveFile;
+
+            return copied;
+        }
+
+        private bool ClipBoardHasData()
+        {
+            return GetClipBoardData() != null;
+        }
+
         private void OnModulate(object sender, EventArgs e)
         {
             PreserveActiveWindowState();
@@ -224,6 +266,14 @@ namespace WaveManagerUI
 
             // hide undo if nothing available
             _menuUndo.Enabled = GetCurrentWaveGraph() != null && GetCurrentWaveGraph().CanUndo();
+
+            // only show close if there are actually windows open
+            _menuClose.Enabled = _menuCloseAll.Enabled = MdiChildren.Length > 0;
+
+            // check if the clipboard has data and adjust buttons accordingly
+            _btnPaste.Enabled = _menuPaste.Enabled = ClipBoardHasData() && WaveManagerBusiness.WaveManager.ActiveFile != null;
+
+            _menuClose.Enabled =_menuCloseAll.Enabled = WaveManagerBusiness.WaveManager.ActiveFile != null;
         }
 
         private void OnPlay(object sender, EventArgs e)
@@ -232,7 +282,10 @@ namespace WaveManagerUI
                 if (MessageBox.Show("Would you like to save first?", "Save", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                     return;
                 else
-                    WaveManagerBusiness.WaveManager.Save();
+                    if (WaveManagerBusiness.WaveManager.ActiveFile.IsNewFile())
+                        SaveAs();
+                    else
+                        WaveManagerBusiness.WaveManager.Save();
 
             // this should play the actively selected file
             new SoundPlayer(WaveManagerBusiness.WaveManager.ActiveFile.filePath).Play();
@@ -254,6 +307,11 @@ namespace WaveManagerUI
 
         private void OnSaveAsClick(object sender, EventArgs e)
         {
+            SaveAs();
+        }
+
+        public void SaveAs()
+        {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Filter = "WAV Files|*.wav|PNG Images|*.png";
             dlg.Title = "Save Wave File";
@@ -263,7 +321,8 @@ namespace WaveManagerUI
             if (result == DialogResult.OK)
             {
                 var activeForm = ((MdiForm)ActiveMdiChild);
-                switch (Path.GetExtension(dlg.FileName).ToLower()) {
+                switch (Path.GetExtension(dlg.FileName).ToLower())
+                {
                     case ".wav":
                         WaveFile newFile = WaveManagerBusiness.WaveManager.SaveAs(dlg.FileName);
                         // this updates the active reference for the selected window
@@ -273,8 +332,8 @@ namespace WaveManagerUI
                         activeForm.GetGraphView().SaveToDisk(dlg.FileName);
                         break;
                     default:
-                         break;
-	            }
+                        break;
+                }
             }
         }
 
@@ -348,6 +407,12 @@ namespace WaveManagerUI
         {
             if (GetCurrentWaveGraph() != null)
                 GetCurrentWaveGraph().UndoChanges();
+        }
+
+        private void OnExitClick(object sender, EventArgs e)
+        {
+            //WaveManagerBusiness.WaveManager.FireApplicationClosing();
+            Application.Exit();
         }
     }
 }

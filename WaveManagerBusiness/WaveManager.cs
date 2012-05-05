@@ -187,6 +187,14 @@ namespace WaveManagerBusiness
             }
         }
 
+        public static void PasteFileData(WaveFile copiedFile)
+        {
+            if (ActiveFile != null)
+            {
+                ActiveFile.AcceptNewDataFrom(copiedFile);
+            }
+        }
+
         public static void Save(WaveFile file)
         {
             file.Save();
