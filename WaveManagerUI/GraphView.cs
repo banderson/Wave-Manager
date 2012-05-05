@@ -68,6 +68,7 @@ namespace WaveManagerUI
             if (!Wave.IsValid())
             {
                 MessageBox.Show("Invalid file! Please select a valid WAV file...");
+                WaveManagerBusiness.WaveManager.FireWarning("Invalid file open: " + Wave.fileName);
                 this.ParentForm.Close();
                 WaveManagerBusiness.WaveManager.FireInvalidFileOpened(Wave);
                 return;

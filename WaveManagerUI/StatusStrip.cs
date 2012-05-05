@@ -30,6 +30,8 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.FileClosed += UpdateSampleCount;
             WaveManagerBusiness.WaveManager.WindowSelected += UpdateSampleCount;
 
+            WaveManagerBusiness.WaveManager.Warning += LogWarning;
+
             InitVolumneControl();
         }
 
@@ -75,6 +77,12 @@ namespace WaveManagerUI
         private void RefreshMemoryCounter(WaveFile file)
         {
             _memoryMeter.Recalculate();
+        }
+
+        private void LogWarning(string message)
+        {
+            _errorList.Items.Insert(0, message);
+            _errorList.SelectedIndex = 0;
         }
     }
 }

@@ -23,6 +23,8 @@ namespace WaveManagerUI
         {
             InitializeComponent();
             this.AllowDrop = true;
+
+            WaveManagerBusiness.WaveManager.FireWarning("Application Launched at "+ DateTime.Now.ToLongDateString());
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -70,6 +72,7 @@ namespace WaveManagerUI
                 catch (Exception)
                 {
                     MessageBox.Show("Invalid file, please choose a file compatible with this application.");
+                    WaveManagerBusiness.WaveManager.FireWarning("Invalid file open: "+ dlg.FileName);
                 }
             }
         }
@@ -107,6 +110,7 @@ namespace WaveManagerUI
         private void OnHelpIndexClick(object sender, EventArgs e)
         {
             MessageBox.Show("Help:Index not required for this project");
+            WaveManagerBusiness.WaveManager.FireWarning("Help:Index not required for this project");
         }
 
         private void OnDragDrop(object sender, DragEventArgs e)

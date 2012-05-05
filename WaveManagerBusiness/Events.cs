@@ -19,6 +19,7 @@ namespace WaveManagerBusiness
         public delegate void ConfigSettingsChangedEventHandler();
         public delegate void CurrentWindowModifiedEventHandler();
         public delegate void DirectoryModifiedEventHandler();
+        public delegate void WarningEventHandler(string message);
 
         public delegate void FileSavedEventHandler();
         public delegate void FileSaveAsEventHandler(WaveFile oldFile, WaveFile newFile);
@@ -45,6 +46,7 @@ namespace WaveManagerBusiness
         public static event FileDeletedEventHandler FileDeleted;
         public static event DirectoryModifiedEventHandler DirectoryModified;
         public static event InvalidFileOpenedEventHandler InvalidFileOpened;
+        public static event WarningEventHandler Warning;
 
 
         /*** Invoke Event Callbacks ***/
@@ -148,6 +150,12 @@ namespace WaveManagerBusiness
         {
             if (InvalidFileOpened != null)
                 InvalidFileOpened.Invoke(file);
+        }
+
+        public static void FireWarning(string message)
+        {
+            if (Warning != null)
+                Warning.Invoke(message);
         }
     }
 }
