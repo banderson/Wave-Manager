@@ -39,7 +39,12 @@ namespace WaveManagerUI
 
         private void OnDragDrop(object sender, DragEventArgs e)
         {
-            MessageBox.Show(e.Data.ToString());
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            WaveFile f = new WaveFile();
+            foreach (string file in files)
+            {
+                f = WaveManagerBusiness.WaveManager.OpenFile(file);
+            }
         }
 
         private void RedrawFiles()
