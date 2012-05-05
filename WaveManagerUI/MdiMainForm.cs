@@ -54,6 +54,7 @@ namespace WaveManagerUI
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "WAVE Files|*.wav";
             dlg.Title = "Open Wave File";
+            dlg.Multiselect = true;
 
             // If the file name is not an empty string open it for saving.
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -61,7 +62,10 @@ namespace WaveManagerUI
                 try
                 {
                     //KeyPassMgr.OpenDocument(dlg.FileName);
-                    WaveFile file = WaveManagerBusiness.WaveManager.OpenFile(dlg.FileName);
+                    foreach (var file in dlg.FileNames)
+                    {
+                        WaveManagerBusiness.WaveManager.OpenFile(file);
+                    }
                 }
                 catch (Exception)
                 {

@@ -48,6 +48,7 @@
             this._btnBrowse.TabIndex = 0;
             this._btnBrowse.Text = "Browse";
             this._btnBrowse.UseVisualStyleBackColor = true;
+            this._btnBrowse.Click += new System.EventHandler(this.OnFolderBrowse);
             // 
             // _fileList
             // 

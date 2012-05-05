@@ -44,14 +44,19 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.AppSettingsChanged += RePaint;
             WaveManagerBusiness.WaveManager.CurrentWindowModified += RePaintCurrent;
 
-            settings = WaveManagerBusiness.WaveManager.GetSettings();
-            this.BackColor = settings.canvasColor;
-            this.pen = new Pen(settings.lineColor, settings.lineWidth);
+            UpdateSettings();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             RenderToGraphics(e.Graphics);
+        }
+
+        private void UpdateSettings()
+        {
+            settings = WaveManagerBusiness.WaveManager.GetSettings();
+            this.BackColor = settings.canvasColor;
+            this.pen = new Pen(settings.lineColor, settings.lineWidth);
         }
 
         private void RenderToGraphics(Graphics canvas, bool print = false)
@@ -225,6 +230,8 @@ namespace WaveManagerUI
 
         private void RePaint()
         {
+            // get any updated settings
+            UpdateSettings();
             Invalidate();
         }
 

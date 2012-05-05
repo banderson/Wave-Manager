@@ -142,5 +142,10 @@ namespace WaveManagerUI
                 _settingsContext.Show(_fileList, e.X, e.Y);
             }
         }
+
+        private void OnFolderBrowse(object sender, EventArgs e)
+        {
+            // was this supposed to be in the program?
+        }
     }
 }
