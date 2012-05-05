@@ -141,6 +141,12 @@ namespace WaveDataContracts
             return _maxDataPoint;
         }
 
+        public void ClearData()
+        {
+            NumberOfSamples = 0;
+            Data = new byte[0];
+        }
+
         public object Clone()
         {
             var copy = new WaveFile();

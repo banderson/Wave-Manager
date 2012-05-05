@@ -177,6 +177,16 @@ namespace WaveManagerBusiness
             FireCurrentWindowModified();
         }
 
+        public static void DeleteFileData()
+        {
+            if (ActiveFile != null)
+            {
+                ActiveFile.ClearData();
+
+                FireCurrentWindowModified();
+            }
+        }
+
         public static void Save(WaveFile file)
         {
             file.Save();

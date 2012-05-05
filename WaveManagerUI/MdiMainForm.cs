@@ -181,6 +181,12 @@ namespace WaveManagerUI
             WaveManagerBusiness.WaveManager.RotateWave();
         }
 
+        private void OnDeleteClick(object sender, EventArgs e)
+        {
+            PreserveActiveWindowState();
+            WaveManagerBusiness.WaveManager.DeleteFileData();
+        }
+
         // this stores the undo data before modifications are made
         private void PreserveActiveWindowState()
         {

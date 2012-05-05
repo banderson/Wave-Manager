@@ -282,7 +282,7 @@
             // 
             this._menuUndo.Name = "_menuUndo";
             this._menuUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this._menuUndo.Size = new System.Drawing.Size(152, 22);
+            this._menuUndo.Size = new System.Drawing.Size(144, 22);
             this._menuUndo.Text = "&Undo";
             this._menuUndo.Click += new System.EventHandler(this.OnUndoClick);
             // 
@@ -290,13 +290,13 @@
             // 
             this._menuRedo.Name = "_menuRedo";
             this._menuRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this._menuRedo.Size = new System.Drawing.Size(152, 22);
+            this._menuRedo.Size = new System.Drawing.Size(144, 22);
             this._menuRedo.Text = "&Redo";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // _menuCut
             // 
@@ -304,7 +304,7 @@
             this._menuCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuCut.Name = "_menuCut";
             this._menuCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this._menuCut.Size = new System.Drawing.Size(152, 22);
+            this._menuCut.Size = new System.Drawing.Size(144, 22);
             this._menuCut.Text = "Cu&t";
             // 
             // _menuCopy
@@ -313,13 +313,13 @@
             this._menuCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuCopy.Name = "_menuCopy";
             this._menuCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this._menuCopy.Size = new System.Drawing.Size(152, 22);
+            this._menuCopy.Size = new System.Drawing.Size(144, 22);
             this._menuCopy.Text = "&Copy";
             // 
             // _menuCopyBitmap
             // 
             this._menuCopyBitmap.Name = "_menuCopyBitmap";
-            this._menuCopyBitmap.Size = new System.Drawing.Size(152, 22);
+            this._menuCopyBitmap.Size = new System.Drawing.Size(144, 22);
             this._menuCopyBitmap.Text = "Copy Bitmap";
             // 
             // _menuPaste
@@ -328,14 +328,15 @@
             this._menuPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._menuPaste.Name = "_menuPaste";
             this._menuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this._menuPaste.Size = new System.Drawing.Size(152, 22);
+            this._menuPaste.Size = new System.Drawing.Size(144, 22);
             this._menuPaste.Text = "&Paste";
             // 
             // _menuDelete
             // 
             this._menuDelete.Name = "_menuDelete";
-            this._menuDelete.Size = new System.Drawing.Size(152, 22);
+            this._menuDelete.Size = new System.Drawing.Size(144, 22);
             this._menuDelete.Text = "Delete";
+            this._menuDelete.Click += new System.EventHandler(this.OnDeleteClick);
             // 
             // toolsToolStripMenuItem
             // 
@@ -393,14 +394,15 @@
             this.thicknessToolStripMenuItem,
             this._menuBGColor});
             this.waveToolStripMenuItem.Name = "waveToolStripMenuItem";
-            this.waveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.waveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.waveToolStripMenuItem.Text = "Wave...";
             // 
             // _menuCanvasColor
             // 
             this._menuCanvasColor.Name = "_menuCanvasColor";
-            this._menuCanvasColor.Size = new System.Drawing.Size(138, 22);
+            this._menuCanvasColor.Size = new System.Drawing.Size(152, 22);
             this._menuCanvasColor.Text = "Color...";
+            this._menuCanvasColor.Click += new System.EventHandler(this.OnLineColorClick);
             // 
             // thicknessToolStripMenuItem
             // 
@@ -410,7 +412,7 @@
             this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.thicknessToolStripMenuItem.Name = "thicknessToolStripMenuItem";
-            this.thicknessToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.thicknessToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.thicknessToolStripMenuItem.Text = "Thickness";
             // 
             // toolStripMenuItem4
@@ -418,30 +420,35 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem4.Text = "1";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem5.Text = "2";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem6.Text = "4";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(80, 22);
             this.toolStripMenuItem7.Text = "8";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.OnLineThicknessChange);
             // 
             // _menuBGColor
             // 
             this._menuBGColor.Name = "_menuBGColor";
-            this._menuBGColor.Size = new System.Drawing.Size(138, 22);
+            this._menuBGColor.Size = new System.Drawing.Size(152, 22);
             this._menuBGColor.Text = "Background";
+            this._menuBGColor.Click += new System.EventHandler(this.OnBackgroundColorClick);
             // 
             // toolsToolStripMenuItem1
             // 
@@ -667,6 +674,7 @@
             this._btnDelete.Size = new System.Drawing.Size(44, 51);
             this._btnDelete.Text = "Delete";
             this._btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._btnDelete.Click += new System.EventHandler(this.OnDeleteClick);
             // 
             // toolStripSeparator7
             // 
