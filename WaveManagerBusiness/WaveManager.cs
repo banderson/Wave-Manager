@@ -172,7 +172,7 @@ namespace WaveManagerBusiness
         {
             WaveFile file = GetActiveFile();
 
-            file.Flip();
+            file.Rotate();
 
             FireCurrentWindowModified();
         }

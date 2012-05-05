@@ -100,11 +100,27 @@ namespace WaveDataContracts
             }
         }
 
+        public void Rotate()
+        {
+            if (!IsValid())
+                return;
+
+            byte[] tmp = new byte[NumberOfSamples];
+            for (int i = NumberOfSamples - 1; i >= 0; i--)
+            {
+                // stack bytes from the back of the array forward to reverse it
+                tmp[NumberOfSamples-1-i] = Data[i];
+            }
+            // set the reversed array as the new data
+            Data = tmp;
+        }
+
         public void Flip()
         {
             if (!IsValid())
                 return;
 
+            // flip along the x-axis
             for (int i = 0; i < NumberOfSamples - 1; i++)
             {
                 Data[i] = (byte)(255 - Data[i]);
